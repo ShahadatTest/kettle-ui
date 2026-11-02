@@ -33,6 +33,8 @@ export default function Home() {
     <div id="top">
       <Header nav={DOCS_NAV} />
 
+      <CursorStrip />
+
       {/* ---------- Hero ---------- */}
       <section className="relative overflow-hidden border-b-2 border-ink">
         <div className="mx-auto grid max-w-[90rem] items-center gap-12 px-4 py-14 sm:px-6 md:py-20 lg:grid-cols-[1.1fr_1fr] lg:px-10 lg:py-28">
