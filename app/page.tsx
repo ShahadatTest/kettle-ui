@@ -10,6 +10,7 @@ import { BareHeroScene, FieldDemo, LiveHeroScene, RevealDemo, TrainStepperDemo }
 import { CursorLab, CursorStrip } from "@/components/docs/cursors";
 import { GALLERY_SNIPPETS } from "@/components/docs/gallery-snippets";
 import { CopyButton } from "@/components/docs/CopyButton";
+import { LuGithub } from "react-icons/lu";
 import { PillButton } from "@/components/kit/PillButton";
 import { Chip } from "@/components/kit/Chip";
 import { EventCard } from "@/components/kit/EventCard";
@@ -64,6 +65,12 @@ export default function Home() {
               </PillButton>
               <PillButton href="#install" tone="sun" arrow={false}>
                 Install
+              </PillButton>
+              <PillButton href="https://github.com/apurvamukherjee/kettle-ui" tone="paper" arrow={false} aria-label="Kettle UI on GitHub">
+                <span className="flex items-center gap-2">
+                  <LuGithub className="size-5" aria-hidden />
+                  GitHub
+                </span>
               </PillButton>
             </div>
             <div className="mt-8 flex w-full max-w-md items-center justify-between gap-3 rounded-2xl border-2 border-ink bg-ink py-2 pl-4 pr-2 text-paper">
