@@ -15,7 +15,7 @@ export function DocSection({
   children: ReactNode;
 }) {
   return (
-    <section id={id} className="scroll-mt-32 border-t-2 border-dashed border-ink/20 py-16 first:border-t-0 md:py-24">
+    <section id={id} className="border-t-2 border-dashed border-ink/20 py-16 first:border-t-0 md:py-24">
       <Chip>{eyebrow}</Chip>
       <h2 className="mt-5 font-display text-[clamp(2.25rem,6vw,4.5rem)] font-extrabold uppercase leading-[0.9] [overflow-wrap:anywhere]">
         {title}
