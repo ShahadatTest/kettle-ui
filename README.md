@@ -3,13 +3,28 @@
 </p>
 
 <p align="center">
-  React components with ink outlines, hard offset shadows and spring animations.<br />
-  Built with React 19, Tailwind CSS v4 and Motion. Installs with the shadcn CLI.
+  <b>React components with ink outlines, hard offset shadows and spring animations.</b><br />
+  Copy them into your project with one shadcn command and change whatever you like.
 </p>
 
 <p align="center">
+  <a href="https://kettle-ui.vercel.app"><img alt="Live site" src="https://img.shields.io/badge/live%20site-kettle--ui.vercel.app-ff4b1f?style=for-the-badge&labelColor=1a1714" /></a>
+</p>
+
+<p align="center">
+  <img alt="Next.js 16" src="https://img.shields.io/badge/Next.js-16-1a1714?style=flat-square&logo=nextdotjs" />
+  <img alt="React 19" src="https://img.shields.io/badge/React-19-1a1714?style=flat-square&logo=react" />
+  <img alt="Tailwind CSS v4" src="https://img.shields.io/badge/Tailwind_CSS-v4-1a1714?style=flat-square&logo=tailwindcss" />
+  <img alt="Motion" src="https://img.shields.io/badge/Motion-14-1a1714?style=flat-square&logo=framer" />
+  <img alt="TypeScript strict" src="https://img.shields.io/badge/TypeScript-strict-1a1714?style=flat-square&logo=typescript" />
+  <img alt="shadcn registry" src="https://img.shields.io/badge/shadcn-registry-1a1714?style=flat-square&logo=shadcnui" />
+</p>
+
+<p align="center">
+  <a href="https://kettle-ui.vercel.app">Live site</a> ·
   <a href="#install">Install</a> ·
   <a href="#components">Components</a> ·
+  <a href="#cursor-lab">Cursors</a> ·
   <a href="#motion-gallery">Gallery</a> ·
   <a href="#how-the-registry-works">Registry</a>
 </p>
@@ -19,6 +34,14 @@
 <p align="center">
   <img src=".github/assets/terminal.svg" alt="Terminal: npx shadcn add @kettle/pill-button" width="100%" />
 </p>
+
+<p align="center">
+  <img src=".github/assets/docs.png" alt="Kettle UI home page with the cursor picker strip and the animated hero scene" width="100%" />
+</p>
+
+| 21 components | 6 cursors | 10 colours | 1 train |
+| :---: | :---: | :---: | :---: |
+| buttons, cards, fields, tickers, draggables | one pick follows you round the site | CSS variables mapped into Tailwind | preloader, hero scene and stepper |
 
 ## Install
 
@@ -65,10 +88,6 @@ Every colour is a CSS variable mapped into Tailwind, so you write `bg-tunes`, `t
 
 ## Components
 
-<p align="center">
-  <img src=".github/assets/docs.png" alt="Kettle UI docs home page" width="100%" />
-</p>
-
 | Name | What it does |
 | --- | --- |
 | `pill-button` | Pill with a hard shadow. A second colour floods up on hover and the arrow hops. Uses `next/link`. |
@@ -95,13 +114,13 @@ Every colour is a CSS variable mapped into Tailwind, so you write `bg-tunes`, `t
 
 Hooks and helpers come along automatically when a component needs them: `use-on-screen`, `use-fine-pointer`, `tf` and `leaf-pick`.
 
-## Motion gallery
+## Cursor lab
 
 <p align="center">
-  <img src=".github/assets/gallery.png" alt="Cursor lab in the motion gallery, with the comet trail cursor" width="100%" />
+  <img src=".github/assets/cursors.png" alt="Cursor lab with the Sparkler cursor selected and live preview boxes" width="100%" />
 </p>
 
-The `/gallery` page has the guitar strings, the brew cup, magnetic and tilt effects, a cursor lab and four draggables. The cursors are Leaf Pick, Lag Ring, Invert Blob, Comet Trail, Sparkler and Kettle:
+Leaf Pick, Lag Ring, Invert Blob, Comet Trail, Sparkler and Kettle. Pick one from the strip above the hero or from the lab and it follows you across every page. The three boxes under the lab show the selected cursor, the label it turns into over a `data-cursor` element, and what clicking does.
 
 ```tsx
 import { Cursor } from "@/components/cursor/Cursor";
@@ -111,6 +130,38 @@ import { Cursor } from "@/components/cursor/Cursor";
 ```
 
 Cursors and mouse dragging switch off on touch screens, and every loop respects `prefers-reduced-motion`.
+
+## The docs site
+
+<p align="center">
+  <img src=".github/assets/dock.png" alt="Header docked into a floating pill while the sidebar highlights the Chip section" width="100%" />
+</p>
+
+**Floating dock.** Scroll past the top and the header shrinks into a rounded pill 16px below the browser edge. Back at the top it opens out again. Both states are the same height, so the page never jumps.
+
+**Scroll-spy.** The sidebar highlights the section you are reading with a sliding sun pill. On phones the section chips do the same and keep the active chip centred. It is right on first load, on `#hash` links, after a refresh and after the back button.
+
+<p align="center">
+  <img src=".github/assets/preloader.svg" alt="Preloader: a toy train chugging along a track while a progress bar fills" width="100%" />
+</p>
+
+**Train preloader.** Plain CSS, so it plays before any JavaScript arrives. About a second and a half, once per tab, and skipped entirely with reduced motion.
+
+## Motion gallery
+
+<p align="center">
+  <img src=".github/assets/gallery.png" alt="Motion gallery hero: Things that move" width="100%" />
+</p>
+
+The `/gallery` page has guitar strings you can strum, the brew cup loader, magnetic and tilt effects, the cursor lab and four draggables: a sticker wall, a throw box, a reorder list and a swipe deck.
+
+## On every screen
+
+<p align="center">
+  <img src=".github/assets/mobile.png" alt="Three phone screenshots: the hero, the event card section and the swipe deck" width="100%" />
+</p>
+
+Checked in Chrome at 320, 375, 414, 768, 1024, 1280, 1440, 1920 and 2560px wide: no sideways scrolling at any depth, no console errors, no broken images or dead links, and tap targets of at least 24px on phones.
 
 ## Run the docs locally
 
@@ -147,7 +198,7 @@ components/
   illustrations/  HeroScene, ToyTrain, TrainStepper
   cursor/         Cursor, LeafPick
   drag/           ThrowBox, ReorderList, SwipeDeck
-  docs/           the documentation site
+  docs/           the documentation site, cursor lab, dock and preloader
 app/globals.css   tokens, shadows, easings, keyframes
 public/r/         built registry (generated)
 ```
