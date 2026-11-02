@@ -208,6 +208,14 @@ app/globals.css   tokens, shadows, easings, keyframes
 public/r/         built registry (generated)
 ```
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md). Questions go to [Discussions](https://github.com/apurvamukherjee/kettle-ui/discussions), bugs to [Issues](https://github.com/apurvamukherjee/kettle-ui/issues).
+
+## License
+
+[MIT](LICENSE)
+
 <br />
 
 <p align="center"><sub>Designed and built by Apurva Mukherjee.</sub></p>
