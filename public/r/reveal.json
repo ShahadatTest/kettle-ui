@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "reveal",
+  "title": "Reveal",
+  "description": "Reveal and Stagger scroll entrances.",
+  "dependencies": [
+    "motion"
+  ],
+  "registryDependencies": [
+    "utils",
+    "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json",
+    "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/tf.json"
+  ],
+  "files": [
+    {
+      "path": "components/motion/Reveal.tsx",
+      "content": "\"use client\";\n\nimport { motion, type HTMLMotionProps } from \"motion/react\";\nimport { Children, type ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\nimport { tf } from \"@/components/motion/tf\";\n\nconst EASE = [0.16, 1, 0.3, 1] as const;\n\n/** Fades/slides children up once they scroll into view. */\nexport function Reveal({\n  children,\n  delay = 0,\n  y = 40,\n  rotate = 0,\n  className,\n  ...rest\n}: {\n  children: ReactNode;\n  delay?: number;\n  y?: number;\n  rotate?: number;\n  className?: string;\n} & Omit<HTMLMotionProps<\"div\">, \"children\">) {\n  return (\n    <motion.div\n      className={className}\n      // one transform string runs on the compositor (see tf)\n      initial={{ opacity: 0, transform: tf({ y, rotate }) }}\n      whileInView={{ opacity: 1, transform: tf({}) }}\n      viewport={{ once: true, margin: \"-10% 0px\" }}\n      transition={{ duration: 0.9, ease: EASE, delay }}\n      {...rest}\n    >\n      {children}\n    </motion.div>\n  );\n}\n\n/** Staggers each direct child in with a springy pop. */\nexport function Stagger({\n  children,\n  className,\n  itemClassName,\n  stagger = 0.08,\n}: {\n  children: ReactNode;\n  className?: string;\n  itemClassName?: string;\n  stagger?: number;\n}) {\n  return (\n    <motion.div\n      className={className}\n      initial=\"hidden\"\n      whileInView=\"show\"\n      viewport={{ once: true, margin: \"-10% 0px\" }}\n      variants={{ show: { transition: { staggerChildren: stagger } } }}\n    >\n      {Children.map(children, (child) => (\n        <motion.div\n          className={cn(itemClassName)}\n          variants={{\n            hidden: { opacity: 0, transform: tf({ y: 60, scale: 0.92, rotate: -3 }) },\n            show: {\n              opacity: 1,\n              transform: tf({}),\n              transition: { type: \"spring\", stiffness: 140, damping: 16 },\n            },\n          }}\n        >\n          {child}\n        </motion.div>\n      ))}\n    </motion.div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/motion/Reveal.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

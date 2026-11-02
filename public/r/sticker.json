@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sticker",
+  "title": "Sticker",
+  "description": "Tilted sticker that bobs and can be dragged with a mouse.",
+  "dependencies": [
+    "motion"
+  ],
+  "registryDependencies": [
+    "utils",
+    "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json",
+    "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/use-on-screen.json",
+    "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/use-fine-pointer.json"
+  ],
+  "files": [
+    {
+      "path": "components/motion/Sticker.tsx",
+      "content": "\"use client\";\n\nimport { motion } from \"motion/react\";\nimport type { ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\nimport { useOnScreen } from \"@/components/motion/useOnScreen\";\nimport { useFinePointer } from \"@/components/motion/useFinePointer\";\n\n/**\n * A tilted, draggable sticker that idles with a gentle bob and\n * springs back when let go.\n */\nexport function Sticker({\n  children,\n  rotate = -8,\n  className,\n  delay = 0,\n  drag = true,\n  play = true,\n}: {\n  children: ReactNode;\n  rotate?: number;\n  className?: string;\n  delay?: number;\n  drag?: boolean;\n  play?: boolean;\n}) {\n  const [ref, onScreen] = useOnScreen();\n  const canDrag = useFinePointer() && drag;\n  return (\n    <motion.div\n      ref={ref}\n      className={cn(\n        \"select-none\",\n        canDrag && \"touch-none cursor-grab active:cursor-grabbing\",\n        className\n      )}\n      initial={{ scale: 0, rotate: rotate - 30 }}\n      animate={play ? { scale: 1, rotate } : undefined}\n      transition={{ type: \"spring\", stiffness: 260, damping: 14, delay }}\n      drag={canDrag}\n      dragSnapToOrigin\n      dragElastic={0.6}\n      whileHover={{ scale: 1.08, rotate: rotate + 6 }}\n      whileDrag={{ scale: 1.15, rotate: rotate - 6, zIndex: 50 }}\n      data-cursor={canDrag ? \"drag\" : undefined}\n    >\n      <motion.div\n        // transform string: runs on the compositor, not per-frame JS\n        animate={\n          onScreen\n            ? { transform: [\"translateY(0px)\", \"translateY(-8px)\", \"translateY(0px)\"] }\n            : { transform: \"translateY(0px)\" }\n        }\n        transition={{\n          duration: 3 + Math.abs(rotate) / 10,\n          repeat: Infinity,\n          ease: \"easeInOut\",\n          delay: delay + 0.6,\n        }}\n      >\n        {children}\n      </motion.div>\n    </motion.div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/motion/Sticker.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

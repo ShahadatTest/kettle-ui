@@ -1,0 +1,740 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "kettle-ui",
+  "homepage": "https://github.com/apurvamukherjee/kettle-ui",
+  "items": [
+    {
+      "name": "kettle-theme",
+      "type": "registry:style",
+      "title": "Kettle theme",
+      "description": "Colour tokens, hard shadows, easings, fonts and the keyframes the animated components need.",
+      "cssVars": {
+        "theme": {
+          "font-display": "var(--font-bricolage), system-ui, sans-serif",
+          "font-mono": "var(--font-fragment-mono), ui-monospace, monospace",
+          "shadow-hard": "4px 4px 0 0 var(--ink)",
+          "shadow-hard-lg": "8px 8px 0 0 var(--ink)",
+          "ease-bounce": "cubic-bezier(0.34, 1.56, 0.64, 1)",
+          "ease-out-expo": "cubic-bezier(0.16, 1, 0.3, 1)"
+        },
+        "light": {
+          "paper": "#fbf6ea",
+          "paper-2": "#f3ead4",
+          "ink": "#1a1714",
+          "tea": "#1fa34a",
+          "tea-deep": "#0f6b30",
+          "tunes": "#ff4b1f",
+          "strings": "#ff4fb8",
+          "lilac": "#8a7cff",
+          "sun": "#ffd43b",
+          "sky": "#7fd1f5",
+          "card": "#fffdf7",
+          "muted-foreground": "#615a51",
+          "destructive": "#d92d20"
+        }
+      },
+      "css": {
+        "@keyframes marquee-x": {
+          "from": {
+            "transform": "translate3d(0, 0, 0)"
+          },
+          "to": {
+            "transform": "translate3d(var(--marquee-to), 0, 0)"
+          }
+        },
+        ".toy-train": {
+          "animation": "train-bob 0.35s ease-in-out infinite"
+        },
+        ".toy-train .wheel": {
+          "transform-box": "fill-box",
+          "transform-origin": "center",
+          "animation": "train-wheel 0.6s linear infinite"
+        },
+        ".toy-train .smoke": {
+          "animation": "train-smoke 1.2s ease-out infinite"
+        },
+        ".toy-train[data-paused=\"true\"], .toy-train[data-paused=\"true\"] *": {
+          "animation-play-state": "paused"
+        },
+        "@keyframes train-bob": {
+          "50%": {
+            "transform": "translateY(-2px)"
+          }
+        },
+        "@keyframes train-wheel": {
+          "to": {
+            "transform": "rotate(360deg)"
+          }
+        },
+        "@keyframes train-smoke": {
+          "from": {
+            "transform": "translate(0, 0)",
+            "opacity": "1"
+          },
+          "to": {
+            "transform": "translate(var(--dx), var(--dy))",
+            "opacity": "0"
+          }
+        },
+        ".brew-cup .brew": {
+          "animation-fill-mode": "both",
+          "animation-timing-function": "cubic-bezier(0.45, 0, 0.2, 1)"
+        },
+        ".brew-cup .cup-outline": {
+          "animation-name": "brew-pop",
+          "animation-duration": "0.5s"
+        },
+        ".brew-cup .cup-inside": {
+          "animation-name": "brew-fade",
+          "animation-duration": "0.3s",
+          "animation-delay": "0.35s"
+        },
+        ".brew-cup .cup-pour": {
+          "transform-origin": "top",
+          "animation-name": "brew-pour",
+          "animation-duration": "1s",
+          "animation-delay": "0.5s"
+        },
+        ".brew-cup .cup-tea": {
+          "animation-name": "brew-rise",
+          "animation-duration": "0.9s",
+          "animation-delay": "0.6s"
+        },
+        ".brew-cup .cup-wave": {
+          "animation": "brew-wave 2.2s linear infinite"
+        },
+        ".brew-cup .cup-wave-front": {
+          "animation-duration": "1.6s",
+          "animation-direction": "reverse"
+        },
+        ".brew-cup .cup-steam": {
+          "transform-box": "fill-box",
+          "animation": "brew-steam 1.6s ease-out 1.3s infinite both"
+        },
+        ".brew-cup .cup-note": {
+          "animation": "brew-note 1.9s ease-out 1.5s infinite both"
+        },
+        "@keyframes brew-pop": {
+          "from": {
+            "opacity": "0",
+            "transform": "scale(0.85)"
+          }
+        },
+        "@keyframes brew-fade": {
+          "from": {
+            "opacity": "0"
+          }
+        },
+        "@keyframes brew-pour": {
+          "0%": {
+            "transform": "translateY(0) scaleY(0)"
+          },
+          "30%": {
+            "transform": "translateY(0) scaleY(1)"
+          },
+          "100%": {
+            "transform": "translateY(100%) scaleY(0)"
+          }
+        },
+        "@keyframes brew-rise": {
+          "from": {
+            "transform": "translateY(103%)"
+          },
+          "to": {
+            "transform": "translateY(7%)"
+          }
+        },
+        "@keyframes brew-wave": {
+          "to": {
+            "transform": "translateX(-33.333%)"
+          }
+        },
+        "@keyframes brew-steam": {
+          "0%": {
+            "opacity": "0",
+            "transform": "translateY(0)"
+          },
+          "40%": {
+            "opacity": "0.9"
+          },
+          "100%": {
+            "opacity": "0",
+            "transform": "translateY(-14px)"
+          }
+        },
+        "@keyframes brew-note": {
+          "0%": {
+            "opacity": "0",
+            "transform": "translateY(10px) scale(0.5)"
+          },
+          "42%": {
+            "opacity": "1",
+            "transform": "translateY(-14px) scale(1)"
+          },
+          "84%, 100%": {
+            "opacity": "0",
+            "transform": "translateY(-34px) scale(0.9)"
+          }
+        },
+        ".animate-swipe-hint": {
+          "animation": "swipe-hint 1.6s ease-in-out infinite"
+        },
+        "@keyframes swipe-hint": {
+          "0%, 100%": {
+            "transform": "translateX(-5px) rotate(-8deg)"
+          },
+          "50%": {
+            "transform": "translateX(5px) rotate(8deg)"
+          }
+        },
+        ".animate-fade-in": {
+          "animation": "fade-in 0.5s ease-out both"
+        },
+        "@keyframes fade-in": {
+          "from": {
+            "opacity": "0",
+            "transform": "translateY(8px)"
+          }
+        },
+        "@media (hover: hover) and (pointer: fine)": {
+          ".has-custom-cursor, .has-custom-cursor *": {
+            "cursor": "none !important"
+          },
+          ".has-custom-cursor :is(input, textarea, [contenteditable=\"true\"])": {
+            "cursor": "text !important"
+          }
+        }
+      }
+    },
+    {
+      "name": "use-on-screen",
+      "type": "registry:hook",
+      "title": "Use On Screen",
+      "description": "Ref plus an is-near-viewport flag, used to pause loops off-screen.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json"
+      ],
+      "files": [
+        {
+          "path": "components/motion/useOnScreen.ts",
+          "type": "registry:hook",
+          "target": "components/motion/useOnScreen.ts"
+        }
+      ]
+    },
+    {
+      "name": "use-fine-pointer",
+      "type": "registry:hook",
+      "title": "Use Fine Pointer",
+      "description": "True on mouse and trackpad devices.",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json"
+      ],
+      "files": [
+        {
+          "path": "components/motion/useFinePointer.ts",
+          "type": "registry:hook",
+          "target": "components/motion/useFinePointer.ts"
+        }
+      ]
+    },
+    {
+      "name": "tf",
+      "type": "registry:lib",
+      "title": "Tf",
+      "description": "Builds one transform string so Motion can run animations on the compositor.",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json"
+      ],
+      "files": [
+        {
+          "path": "components/motion/tf.ts",
+          "type": "registry:lib",
+          "target": "components/motion/tf.ts"
+        }
+      ]
+    },
+    {
+      "name": "pill-button",
+      "type": "registry:component",
+      "title": "Pill Button",
+      "description": "Pill button with a hard shadow, colour flood and hopping arrow. Uses next/link.",
+      "dependencies": [
+        "motion",
+        "react-icons"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json"
+      ],
+      "files": [
+        {
+          "path": "components/kit/PillButton.tsx",
+          "type": "registry:component",
+          "target": "components/kit/PillButton.tsx"
+        }
+      ]
+    },
+    {
+      "name": "chip",
+      "type": "registry:component",
+      "title": "Chip",
+      "description": "Tilted mono label.",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json"
+      ],
+      "files": [
+        {
+          "path": "components/kit/Chip.tsx",
+          "type": "registry:component",
+          "target": "components/kit/Chip.tsx"
+        }
+      ]
+    },
+    {
+      "name": "field",
+      "type": "registry:component",
+      "title": "Field",
+      "description": "Labelled input with hint and error states.",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json"
+      ],
+      "files": [
+        {
+          "path": "components/kit/Field.tsx",
+          "type": "registry:component",
+          "target": "components/kit/Field.tsx"
+        }
+      ]
+    },
+    {
+      "name": "event-card",
+      "type": "registry:component",
+      "title": "Event Card",
+      "description": "Poster card with a colour wash on hover.",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json"
+      ],
+      "files": [
+        {
+          "path": "components/kit/EventCard.tsx",
+          "type": "registry:component",
+          "target": "components/kit/EventCard.tsx"
+        }
+      ]
+    },
+    {
+      "name": "polaroid",
+      "type": "registry:component",
+      "title": "Polaroid",
+      "description": "Instant-photo frame with a caption.",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json"
+      ],
+      "files": [
+        {
+          "path": "components/kit/Polaroid.tsx",
+          "type": "registry:component",
+          "target": "components/kit/Polaroid.tsx"
+        }
+      ]
+    },
+    {
+      "name": "split-words",
+      "type": "registry:component",
+      "title": "Split Words",
+      "description": "Word-by-word masked heading reveal.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/tf.json"
+      ],
+      "files": [
+        {
+          "path": "components/motion/SplitWords.tsx",
+          "type": "registry:component",
+          "target": "components/motion/SplitWords.tsx"
+        }
+      ]
+    },
+    {
+      "name": "reveal",
+      "type": "registry:component",
+      "title": "Reveal",
+      "description": "Reveal and Stagger scroll entrances.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/tf.json"
+      ],
+      "files": [
+        {
+          "path": "components/motion/Reveal.tsx",
+          "type": "registry:component",
+          "target": "components/motion/Reveal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "section-heading",
+      "type": "registry:component",
+      "title": "Section Heading",
+      "description": "Eyebrow, split-reveal title and subtitle.",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/split-words.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/reveal.json"
+      ],
+      "files": [
+        {
+          "path": "components/kit/SectionHeading.tsx",
+          "type": "registry:component",
+          "target": "components/kit/SectionHeading.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sticker",
+      "type": "registry:component",
+      "title": "Sticker",
+      "description": "Tilted sticker that bobs and can be dragged with a mouse.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/use-on-screen.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/use-fine-pointer.json"
+      ],
+      "files": [
+        {
+          "path": "components/motion/Sticker.tsx",
+          "type": "registry:component",
+          "target": "components/motion/Sticker.tsx"
+        }
+      ]
+    },
+    {
+      "name": "marquee",
+      "type": "registry:component",
+      "title": "Marquee",
+      "description": "Infinite ticker that reacts to scroll speed on desktop.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/use-on-screen.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/use-fine-pointer.json"
+      ],
+      "files": [
+        {
+          "path": "components/motion/Marquee.tsx",
+          "type": "registry:component",
+          "target": "components/motion/Marquee.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pluck-strings",
+      "type": "registry:component",
+      "title": "Pluck Strings",
+      "description": "Guitar strings you can strum, with optional synthesised sound.",
+      "dependencies": [
+        "react-icons"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json"
+      ],
+      "files": [
+        {
+          "path": "components/motion/PluckStrings.tsx",
+          "type": "registry:component",
+          "target": "components/motion/PluckStrings.tsx"
+        }
+      ]
+    },
+    {
+      "name": "brew-cup",
+      "type": "registry:component",
+      "title": "Brew Cup",
+      "description": "CSS-only cup-of-tea loader.",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json"
+      ],
+      "files": [
+        {
+          "path": "components/motion/BrewCup.tsx",
+          "type": "registry:component",
+          "target": "components/motion/BrewCup.tsx"
+        }
+      ]
+    },
+    {
+      "name": "magnetic",
+      "type": "registry:component",
+      "title": "Magnetic",
+      "description": "Wrapper that leans toward the mouse.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/use-fine-pointer.json"
+      ],
+      "files": [
+        {
+          "path": "components/motion/Magnetic.tsx",
+          "type": "registry:component",
+          "target": "components/motion/Magnetic.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tilt-card",
+      "type": "registry:component",
+      "title": "Tilt Card",
+      "description": "3D tilt card with a glare.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json"
+      ],
+      "files": [
+        {
+          "path": "components/motion/TiltCard.tsx",
+          "type": "registry:component",
+          "target": "components/motion/TiltCard.tsx"
+        }
+      ]
+    },
+    {
+      "name": "hero-scene",
+      "type": "registry:component",
+      "title": "Hero Scene",
+      "description": "Animated SVG scene: a toy train crossing hills below a mountain.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json"
+      ],
+      "files": [
+        {
+          "path": "components/illustrations/HeroScene.tsx",
+          "type": "registry:component",
+          "target": "components/illustrations/HeroScene.tsx"
+        }
+      ]
+    },
+    {
+      "name": "toy-train",
+      "type": "registry:component",
+      "title": "Toy Train",
+      "description": "Chugging toy train in CSS.",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/use-on-screen.json"
+      ],
+      "files": [
+        {
+          "path": "components/illustrations/ToyTrain.tsx",
+          "type": "registry:component",
+          "target": "components/illustrations/ToyTrain.tsx"
+        }
+      ]
+    },
+    {
+      "name": "train-stepper",
+      "type": "registry:component",
+      "title": "Train Stepper",
+      "description": "Ticket-stub step picker with the toy train.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/toy-train.json"
+      ],
+      "files": [
+        {
+          "path": "components/illustrations/TrainStepper.tsx",
+          "type": "registry:component",
+          "target": "components/illustrations/TrainStepper.tsx"
+        }
+      ]
+    },
+    {
+      "name": "leaf-pick",
+      "type": "registry:component",
+      "title": "Leaf Pick",
+      "description": "Leaf-shaped pick icon.",
+      "dependencies": [],
+      "registryDependencies": [
+        "utils",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json"
+      ],
+      "files": [
+        {
+          "path": "components/cursor/LeafPick.tsx",
+          "type": "registry:component",
+          "target": "components/cursor/LeafPick.tsx"
+        }
+      ]
+    },
+    {
+      "name": "cursor",
+      "type": "registry:component",
+      "title": "Cursor",
+      "description": "Custom cursor with six variants and data-cursor labels.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/use-fine-pointer.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/leaf-pick.json"
+      ],
+      "files": [
+        {
+          "path": "components/cursor/Cursor.tsx",
+          "type": "registry:component",
+          "target": "components/cursor/Cursor.tsx"
+        }
+      ]
+    },
+    {
+      "name": "throw-box",
+      "type": "registry:component",
+      "title": "Throw Box",
+      "description": "Box of items you can fling around.",
+      "dependencies": [
+        "motion"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json"
+      ],
+      "files": [
+        {
+          "path": "components/drag/ThrowBox.tsx",
+          "type": "registry:component",
+          "target": "components/drag/ThrowBox.tsx"
+        }
+      ]
+    },
+    {
+      "name": "reorder-list",
+      "type": "registry:component",
+      "title": "Reorder List",
+      "description": "Drag-handle reorderable list.",
+      "dependencies": [
+        "motion",
+        "react-icons"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json"
+      ],
+      "files": [
+        {
+          "path": "components/drag/ReorderList.tsx",
+          "type": "registry:component",
+          "target": "components/drag/ReorderList.tsx"
+        }
+      ]
+    },
+    {
+      "name": "swipe-deck",
+      "type": "registry:component",
+      "title": "Swipe Deck",
+      "description": "Swipeable card deck with button fallbacks.",
+      "dependencies": [
+        "motion",
+        "react-icons"
+      ],
+      "registryDependencies": [
+        "utils",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json"
+      ],
+      "files": [
+        {
+          "path": "components/drag/SwipeDeck.tsx",
+          "type": "registry:component",
+          "target": "components/drag/SwipeDeck.tsx"
+        }
+      ]
+    },
+    {
+      "name": "kettle-all",
+      "type": "registry:item",
+      "title": "Everything",
+      "description": "Every Kettle UI component, hook and the theme.",
+      "registryDependencies": [
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/use-on-screen.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/use-fine-pointer.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/tf.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/pill-button.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/chip.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/field.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/event-card.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/polaroid.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/split-words.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/reveal.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/section-heading.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/sticker.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/marquee.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/pluck-strings.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/brew-cup.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/magnetic.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/tilt-card.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/hero-scene.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/toy-train.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/train-stepper.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/leaf-pick.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/cursor.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/throw-box.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/reorder-list.json",
+        "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/swipe-deck.json"
+      ]
+    }
+  ]
+}

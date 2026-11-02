@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tf",
+  "title": "Tf",
+  "description": "Builds one transform string so Motion can run animations on the compositor.",
+  "dependencies": [],
+  "registryDependencies": [
+    "utils",
+    "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json"
+  ],
+  "files": [
+    {
+      "path": "components/motion/tf.ts",
+      "content": "/**\n * One `transform` string for motion. Animating `transform` as a whole lets motion\n * hand the animation to WAAPI so the compositor runs it; separate x/y/rotate/scale\n * values are recomputed in JS every frame and visibly lag behind scrolling on iOS.\n * Every call emits the same function list, so any two values interpolate cleanly.\n *\n * The translate is 3D so the element keeps its GPU layer once the animation ends.\n * With a 2D transform the browser drops the layer at the last frame and repaints\n * the element into the page, which shows as a one-frame white flash. Pass\n * `flat` for things there are many of (per-word heading reveals), where a layer\n * each costs too much memory on iPhone.\n */\nexport function tf({\n  x = 0,\n  y = 0,\n  rotate = 0,\n  scale = 1,\n  flat = false,\n}: {\n  x?: number | string;\n  y?: number | string;\n  rotate?: number;\n  scale?: number;\n  flat?: boolean;\n}) {\n  const len = (v: number | string) => (typeof v === \"number\" ? `${v}px` : v);\n  const move = flat ? `translate(${len(x)}, ${len(y)})` : `translate3d(${len(x)}, ${len(y)}, 0)`;\n  return `${move} rotate(${rotate}deg) scale(${scale})`;\n}\n",
+      "type": "registry:lib",
+      "target": "components/motion/tf.ts"
+    }
+  ],
+  "type": "registry:lib"
+}

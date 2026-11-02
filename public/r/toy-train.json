@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "toy-train",
+  "title": "Toy Train",
+  "description": "Chugging toy train in CSS.",
+  "dependencies": [],
+  "registryDependencies": [
+    "utils",
+    "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json",
+    "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/use-on-screen.json"
+  ],
+  "files": [
+    {
+      "path": "components/illustrations/ToyTrain.tsx",
+      "content": "\"use client\";\n\nimport type { CSSProperties } from \"react\";\nimport { cn } from \"@/lib/utils\";\nimport { useOnScreen } from \"@/components/motion/useOnScreen\";\n\n/** Toy train, chugging (CSS animations in globals.css). */\nexport function ToyTrain({ className }: { className?: string }) {\n  const [ref, on] = useOnScreen<SVGSVGElement>();\n  return (\n    <svg\n      ref={ref}\n      viewBox=\"0 0 120 56\"\n      className={cn(\"toy-train h-12 w-auto overflow-visible md:h-14\", className)}\n      data-paused={!on}\n      aria-hidden\n    >\n      {[0, 1, 2].map((i) => (\n        <circle\n          key={i}\n          className=\"smoke\"\n          cx={96}\n          cy={8}\n          r={5 + i}\n          fill=\"var(--paper)\"\n          stroke=\"var(--ink)\"\n          strokeWidth=\"2\"\n          style={{ \"--dx\": `${-10 - i * 8}px`, \"--dy\": `${-12 - i * 3}px`, animationDelay: `${i * 0.4}s` } as CSSProperties}\n        />\n      ))}\n      <rect x=\"4\" y=\"22\" width=\"44\" height=\"22\" rx=\"4\" fill=\"var(--sky)\" stroke=\"var(--ink)\" strokeWidth=\"3\" />\n      <rect x=\"10\" y=\"27\" width=\"10\" height=\"8\" rx=\"1\" fill=\"var(--paper)\" stroke=\"var(--ink)\" strokeWidth=\"2\" />\n      <rect x=\"26\" y=\"27\" width=\"10\" height=\"8\" rx=\"1\" fill=\"var(--paper)\" stroke=\"var(--ink)\" strokeWidth=\"2\" />\n      <rect x=\"52\" y=\"16\" width=\"56\" height=\"28\" rx=\"4\" fill=\"var(--tunes)\" stroke=\"var(--ink)\" strokeWidth=\"3\" />\n      <rect x=\"90\" y=\"8\" width=\"10\" height=\"10\" fill=\"var(--ink)\" />\n      <rect x=\"58\" y=\"21\" width=\"14\" height=\"10\" rx=\"1\" fill=\"var(--paper)\" stroke=\"var(--ink)\" strokeWidth=\"2\" />\n      {[16, 36, 64, 92].map((cx) => (\n        <g key={cx} className=\"wheel\">\n          <circle cx={cx} cy=\"46\" r=\"7\" fill=\"var(--ink)\" />\n          <rect x={cx - 1} y=\"40\" width=\"2\" height=\"12\" fill=\"var(--paper)\" />\n        </g>\n      ))}\n    </svg>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/illustrations/ToyTrain.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

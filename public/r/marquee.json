@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "marquee",
+  "title": "Marquee",
+  "description": "Infinite ticker that reacts to scroll speed on desktop.",
+  "dependencies": [
+    "motion"
+  ],
+  "registryDependencies": [
+    "utils",
+    "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json",
+    "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/use-on-screen.json",
+    "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/use-fine-pointer.json"
+  ],
+  "files": [
+    {
+      "path": "components/motion/Marquee.tsx",
+      "content": "\"use client\";\n\nimport {\n  motion,\n  useAnimationFrame,\n  useMotionValue,\n  useScroll,\n  useSpring,\n  useTransform,\n  useVelocity,\n  wrap,\n} from \"motion/react\";\nimport { useRef, type CSSProperties, type ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\nimport { useOnScreen } from \"@/components/motion/useOnScreen\";\nimport { useFinePointer } from \"@/components/motion/useFinePointer\";\n\n/**\n * Infinite ticker. On mouse/trackpad devices its speed (and direction) reacts\n * to scroll velocity; on touch screens it is a plain CSS animation so the\n * compositor runs it with no per-frame JavaScript (much smoother on iOS Safari).\n * `baseVelocity` is in % of one copy per second; negative scrolls left.\n */\nexport function Marquee(props: {\n  children: ReactNode;\n  baseVelocity?: number;\n  className?: string;\n  innerClassName?: string;\n  copies?: number;\n}) {\n  const fine = useFinePointer();\n  return fine ? <ScrollMarquee {...props} /> : <CssMarquee {...props} />;\n}\n\nfunction Copies({\n  children,\n  copies,\n  innerClassName,\n}: {\n  children: ReactNode;\n  copies: number;\n  innerClassName?: string;\n}) {\n  return Array.from({ length: copies }).map((_, i) => (\n    <div\n      key={i}\n      className={cn(\"flex shrink-0 items-center\", innerClassName)}\n      aria-hidden={i > 0}\n    >\n      {children}\n    </div>\n  ));\n}\n\nfunction CssMarquee({\n  children,\n  baseVelocity = -4,\n  className,\n  innerClassName,\n  copies = 4,\n}: {\n  children: ReactNode;\n  baseVelocity?: number;\n  className?: string;\n  innerClassName?: string;\n  copies?: number;\n}) {\n  const [ref, onScreen] = useOnScreen();\n  const style = {\n    \"--marquee-to\": `${-100 / copies}%`,\n    animation: `marquee-x ${100 / Math.max(0.5, Math.abs(baseVelocity))}s linear infinite`,\n    animationDirection: baseVelocity > 0 ? \"reverse\" : \"normal\",\n    animationPlayState: onScreen ? \"running\" : \"paused\",\n  } as CSSProperties;\n  return (\n    <div ref={ref} className={cn(\"overflow-hidden whitespace-nowrap flex\", className)}>\n      <div className=\"flex flex-nowrap shrink-0 will-change-transform\" style={style}>\n        <Copies copies={copies} innerClassName={innerClassName}>\n          {children}\n        </Copies>\n      </div>\n    </div>\n  );\n}\n\nfunction ScrollMarquee({\n  children,\n  baseVelocity = -4,\n  className,\n  innerClassName,\n  copies = 4,\n}: {\n  children: ReactNode;\n  baseVelocity?: number;\n  className?: string;\n  innerClassName?: string;\n  copies?: number;\n}) {\n  const x = useMotionValue(0);\n  const { scrollY } = useScroll();\n  const velocity = useVelocity(scrollY);\n  const smooth = useSpring(velocity, { damping: 50, stiffness: 400 });\n  const factor = useTransform(smooth, [0, 1000], [0, 4], { clamp: false });\n  const dir = useRef(1);\n  const hovered = useRef(false);\n  const [ref, onScreen] = useOnScreen();\n\n  const xPct = useTransform(x, (v) => `${wrap(-100 / copies, 0, v)}%`);\n\n  useAnimationFrame((_, delta) => {\n    if (!onScreen) return;\n    const f = factor.get();\n    if (f < 0) dir.current = -1;\n    else if (f > 0) dir.current = 1;\n    let move = dir.current * baseVelocity * (delta / 1000) / copies;\n    move += dir.current * move * Math.abs(f);\n    if (hovered.current) move *= 0.25;\n    x.set(x.get() + move);\n  });\n\n  return (\n    <div\n      ref={ref}\n      className={cn(\"overflow-hidden whitespace-nowrap flex\", className)}\n      onPointerEnter={() => (hovered.current = true)}\n      onPointerLeave={() => (hovered.current = false)}\n    >\n      <motion.div className=\"flex flex-nowrap shrink-0\" style={{ x: xPct }}>\n        <Copies copies={copies} innerClassName={innerClassName}>\n          {children}\n        </Copies>\n      </motion.div>\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/motion/Marquee.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

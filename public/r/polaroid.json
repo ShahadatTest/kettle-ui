@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "polaroid",
+  "title": "Polaroid",
+  "description": "Instant-photo frame with a caption.",
+  "dependencies": [],
+  "registryDependencies": [
+    "utils",
+    "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json"
+  ],
+  "files": [
+    {
+      "path": "components/kit/Polaroid.tsx",
+      "content": "import type { ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\n/** White instant-photo frame with a mono caption strip. */\nexport function Polaroid({\n  children,\n  caption,\n  className,\n  frameClassName,\n}: {\n  children: ReactNode;\n  caption?: ReactNode;\n  className?: string;\n  frameClassName?: string;\n}) {\n  return (\n    <figure className={cn(\"relative rounded-[1.75rem] border-2 border-ink bg-white p-3 pb-14 shadow-hard-lg\", className)}>\n      <div className={cn(\"relative aspect-[4/3] overflow-hidden rounded-2xl bg-sky\", frameClassName)}>{children}</div>\n      {caption && (\n        <figcaption className=\"absolute inset-x-0 bottom-4 px-4 text-center font-mono text-xs uppercase tracking-widest sm:text-sm\">\n          {caption}\n        </figcaption>\n      )}\n    </figure>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/kit/Polaroid.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

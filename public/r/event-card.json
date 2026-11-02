@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "event-card",
+  "title": "Event Card",
+  "description": "Poster card with a colour wash on hover.",
+  "dependencies": [],
+  "registryDependencies": [
+    "utils",
+    "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json"
+  ],
+  "files": [
+    {
+      "path": "components/kit/EventCard.tsx",
+      "content": "import type { ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\n/** Poster card: a colour wash floods up on hover and reveals the description. */\nexport function EventCard({\n  title,\n  desc,\n  image,\n  accent = \"var(--tunes)\",\n  footer,\n  className,\n}: {\n  title: string;\n  desc?: ReactNode;\n  image?: string;\n  accent?: string;\n  footer?: ReactNode;\n  className?: string;\n}) {\n  return (\n    <article\n      className={cn(\n        \"group relative h-full min-h-[24rem] overflow-hidden rounded-[2rem] border-2 border-ink bg-ink shadow-hard-lg\",\n        className\n      )}\n    >\n      {image && (\n        // plain img: the kit must work with any URL and static export, not only next/image\n        // eslint-disable-next-line @next/next/no-img-element\n        <img\n          src={image}\n          alt=\"\"\n          loading=\"lazy\"\n          decoding=\"async\"\n          className=\"absolute inset-0 size-full object-cover transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:scale-110\"\n        />\n      )}\n      <div\n        className=\"absolute inset-0 translate-y-full opacity-90 transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:translate-y-0\"\n        style={{ background: accent }}\n      />\n      <div className=\"absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent transition-opacity duration-500 group-hover:opacity-0\" />\n      <div className=\"relative flex h-full min-h-[inherit] flex-col justify-end gap-3 p-6 text-paper transition-colors group-hover:text-ink\">\n        <h3 className=\"font-display text-3xl font-extrabold uppercase leading-none [overflow-wrap:anywhere]\">{title}</h3>\n        {desc && (\n          <p className=\"max-h-0 overflow-hidden text-sm font-medium opacity-0 transition-all duration-500 group-hover:max-h-52 group-hover:opacity-100 [@media(hover:none)]:max-h-52 [@media(hover:none)]:opacity-100 md:text-base\">\n            {desc}\n          </p>\n        )}\n        {footer}\n      </div>\n    </article>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/kit/EventCard.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

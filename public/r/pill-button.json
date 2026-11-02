@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pill-button",
+  "title": "Pill Button",
+  "description": "Pill button with a hard shadow, colour flood and hopping arrow. Uses next/link.",
+  "dependencies": [
+    "motion",
+    "react-icons"
+  ],
+  "registryDependencies": [
+    "utils",
+    "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json"
+  ],
+  "files": [
+    {
+      "path": "components/kit/PillButton.tsx",
+      "content": "\"use client\";\n\nimport Link from \"next/link\";\nimport { motion } from \"motion/react\";\nimport { LuArrowUpRight } from \"react-icons/lu\";\nimport type { ComponentProps, ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\ntype Tone = \"ink\" | \"tea\" | \"tunes\" | \"strings\" | \"sun\" | \"paper\";\n\nconst TONE: Record<Tone, string> = {\n  ink: \"bg-ink text-paper\",\n  tea: \"bg-tea text-paper\",\n  tunes: \"bg-tunes text-paper\",\n  strings: \"bg-strings text-ink\",\n  sun: \"bg-sun text-ink\",\n  paper: \"bg-paper text-ink\",\n};\n\nconst FLOOD: Record<Tone, string> = {\n  ink: \"bg-tunes\",\n  tea: \"bg-ink\",\n  tunes: \"bg-ink\",\n  strings: \"bg-sun\",\n  sun: \"bg-strings\",\n  paper: \"bg-sun\",\n};\n\n/**\n * Chunky pill with a hard ink shadow. On hover a second colour floods up\n * from the bottom and the arrow hops out and back in.\n */\nexport function PillButton({\n  href,\n  children,\n  tone = \"ink\",\n  className,\n  external,\n  arrow = true,\n  onClick,\n  type = \"button\",\n  ...rest\n}: {\n  href?: string;\n  children: ReactNode;\n  tone?: Tone;\n  className?: string;\n  external?: boolean;\n  arrow?: boolean;\n  onClick?: () => void;\n  type?: \"button\" | \"submit\";\n} & Omit<ComponentProps<\"a\">, \"href\" | \"onClick\" | \"type\">) {\n  const inner = (\n    <>\n      <span\n        className={cn(\n          \"absolute inset-0 translate-y-full rounded-full transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover/pill:translate-y-0\",\n          FLOOD[tone]\n        )}\n      />\n      <span className=\"relative z-10\">{children}</span>\n      {arrow && (\n        <span className=\"relative z-10 grid size-6 place-items-center overflow-hidden rounded-full bg-current/15\">\n          <LuArrowUpRight className=\"size-4 transition-transform duration-300 group-hover/pill:-translate-y-6 group-hover/pill:translate-x-6\" />\n          <LuArrowUpRight className=\"absolute size-4 -translate-x-6 translate-y-6 transition-transform duration-300 group-hover/pill:translate-x-0 group-hover/pill:translate-y-0\" />\n        </span>\n      )}\n    </>\n  );\n\n  const cls = cn(\n    \"group/pill relative inline-flex items-center gap-2 overflow-hidden rounded-full border-2 border-ink px-6 py-3 font-display text-base font-bold shadow-hard transition-[transform,box-shadow] duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-hard-lg active:translate-x-1 active:translate-y-1 active:shadow-none\",\n    TONE[tone],\n    className\n  );\n\n  if (href) {\n    const isExternal = external ?? /^https?:/.test(href);\n    return (\n      <motion.span className=\"inline-block\" whileTap={{ scale: 0.96 }}>\n        <Link\n          href={href}\n          className={cls}\n          target={isExternal ? \"_blank\" : undefined}\n          rel={isExternal ? \"noopener noreferrer\" : undefined}\n          {...rest}\n        >\n          {inner}\n        </Link>\n      </motion.span>\n    );\n  }\n  return (\n    <motion.button\n      type={type}\n      className={cls}\n      onClick={onClick}\n      whileTap={{ scale: 0.96 }}\n    >\n      {inner}\n    </motion.button>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/kit/PillButton.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

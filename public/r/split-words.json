@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "split-words",
+  "title": "Split Words",
+  "description": "Word-by-word masked heading reveal.",
+  "dependencies": [
+    "motion"
+  ],
+  "registryDependencies": [
+    "utils",
+    "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json",
+    "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/tf.json"
+  ],
+  "files": [
+    {
+      "path": "components/motion/SplitWords.tsx",
+      "content": "\"use client\";\n\nimport { motion } from \"motion/react\";\nimport { createElement, type ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\nimport { tf } from \"@/components/motion/tf\";\n\ntype Word = string | { text: string; className?: string };\n\n/**\n * Masked word-by-word reveal for headings.\n * Pass strings, or `{ text, className }` to colour/highlight single words.\n */\nexport function SplitWords({\n  words,\n  as = \"h2\",\n  className,\n  delay = 0,\n  stagger = 0.06,\n}: {\n  words: Word[] | string;\n  as?: \"h1\" | \"h2\" | \"h3\" | \"p\" | \"span\";\n  className?: string;\n  delay?: number;\n  stagger?: number;\n}) {\n  const list: Word[] = typeof words === \"string\" ? words.split(\" \") : words;\n\n  const children: ReactNode = list.map((w, i) => {\n    const text = typeof w === \"string\" ? w : w.text;\n    const wc = typeof w === \"string\" ? undefined : w.className;\n    return (\n      <span\n        key={i}\n        className=\"inline-block overflow-hidden align-bottom pb-[0.08em] -mb-[0.08em]\"\n      >\n        <motion.span\n          className={cn(\"inline-block\", wc)}\n          variants={{\n            hidden: { transform: tf({ y: \"110%\", rotate: 6, flat: true }) },\n            show: {\n              transform: tf({ y: \"0%\", flat: true }),\n              transition: {\n                duration: 0.8,\n                ease: [0.16, 1, 0.3, 1],\n                delay: delay + i * stagger,\n              },\n            },\n          }}\n        >\n          {text}\n        </motion.span>\n        {i < list.length - 1 && \" \"}\n      </span>\n    );\n  });\n\n  return createElement(\n    motion[as],\n    {\n      className,\n      initial: \"hidden\",\n      whileInView: \"show\",\n      viewport: { once: true, margin: \"-5% 0px\" },\n      \"aria-label\": list.map((w) => (typeof w === \"string\" ? w : w.text)).join(\" \"),\n    },\n    children\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/motion/SplitWords.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

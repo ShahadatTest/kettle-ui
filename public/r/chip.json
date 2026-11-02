@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "chip",
+  "title": "Chip",
+  "description": "Tilted mono label.",
+  "dependencies": [],
+  "registryDependencies": [
+    "utils",
+    "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json"
+  ],
+  "files": [
+    {
+      "path": "components/kit/Chip.tsx",
+      "content": "import type { ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\ntype Tone = \"sun\" | \"tea\" | \"tunes\" | \"strings\" | \"lilac\" | \"sky\" | \"paper\" | \"ink\";\n\nconst TONE: Record<Tone, string> = {\n  sun: \"bg-sun text-ink\",\n  tea: \"bg-tea text-paper\",\n  tunes: \"bg-tunes text-paper\",\n  strings: \"bg-strings text-ink\",\n  lilac: \"bg-lilac text-ink\",\n  sky: \"bg-sky text-ink\",\n  paper: \"bg-paper text-ink\",\n  ink: \"bg-ink text-paper\",\n};\n\n/** Tilted mono eyebrow label. */\nexport function Chip({\n  children,\n  tone = \"sun\",\n  tilt = true,\n  className,\n}: {\n  children: ReactNode;\n  tone?: Tone;\n  tilt?: boolean;\n  className?: string;\n}) {\n  return (\n    <span\n      className={cn(\n        \"inline-flex items-center gap-2 rounded-full border-2 border-ink px-4 py-1.5 font-mono text-xs uppercase tracking-[0.2em]\",\n        tilt && \"-rotate-2\",\n        TONE[tone],\n        className\n      )}\n    >\n      {children}\n    </span>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/kit/Chip.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "magnetic",
+  "title": "Magnetic",
+  "description": "Wrapper that leans toward the mouse.",
+  "dependencies": [
+    "motion"
+  ],
+  "registryDependencies": [
+    "utils",
+    "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json",
+    "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/use-fine-pointer.json"
+  ],
+  "files": [
+    {
+      "path": "components/motion/Magnetic.tsx",
+      "content": "\"use client\";\n\nimport { motion, useMotionValue, useSpring } from \"motion/react\";\nimport { useRef, type ReactNode } from \"react\";\nimport { useFinePointer } from \"./useFinePointer\";\n\n/** Leans toward the pointer while it hovers, springs back on leave. Mouse only. */\nexport function Magnetic({ children, strength = 0.35, className }: { children: ReactNode; strength?: number; className?: string }) {\n  const ref = useRef<HTMLDivElement>(null);\n  const fine = useFinePointer();\n  const x = useSpring(useMotionValue(0), { stiffness: 220, damping: 14 });\n  const y = useSpring(useMotionValue(0), { stiffness: 220, damping: 14 });\n\n  return (\n    <motion.div\n      ref={ref}\n      className={className}\n      style={{ x, y, display: \"inline-block\" }}\n      onPointerMove={(e) => {\n        const r = ref.current?.getBoundingClientRect();\n        if (!fine || !r || e.pointerType !== \"mouse\") return;\n        x.set((e.clientX - (r.left + r.width / 2)) * strength);\n        y.set((e.clientY - (r.top + r.height / 2)) * strength);\n      }}\n      onPointerLeave={() => {\n        x.set(0);\n        y.set(0);\n      }}\n    >\n      {children}\n    </motion.div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/motion/Magnetic.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

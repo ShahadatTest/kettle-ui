@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "throw-box",
+  "title": "Throw Box",
+  "description": "Box of items you can fling around.",
+  "dependencies": [
+    "motion"
+  ],
+  "registryDependencies": [
+    "utils",
+    "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json"
+  ],
+  "files": [
+    {
+      "path": "components/drag/ThrowBox.tsx",
+      "content": "\"use client\";\n\nimport { motion } from \"motion/react\";\nimport { useRef, type ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type Throwable = { id: string; node: ReactNode; left: string; top: string; rotate?: number };\n\n/** Fling items around a box; they keep momentum and bounce off the walls. */\nexport function ThrowBox({ items, className }: { items: Throwable[]; className?: string }) {\n  const box = useRef<HTMLDivElement>(null);\n  return (\n    <div ref={box} className={cn(\"relative h-80 overflow-hidden rounded-[1.5rem] border-2 border-ink bg-paper-2\", className)}>\n      {items.map((it) => (\n        <motion.div\n          key={it.id}\n          className=\"absolute cursor-grab touch-none select-none active:cursor-grabbing\"\n          style={{ left: it.left, top: it.top, rotate: it.rotate ?? 0 }}\n          drag\n          dragConstraints={box}\n          dragElastic={0.25}\n          dragTransition={{ bounceStiffness: 320, bounceDamping: 14, power: 0.4 }}\n          whileHover={{ scale: 1.05 }}\n          whileDrag={{ scale: 1.12, zIndex: 10 }}\n          data-cursor=\"Throw\"\n        >\n          {it.node}\n        </motion.div>\n      ))}\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/drag/ThrowBox.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

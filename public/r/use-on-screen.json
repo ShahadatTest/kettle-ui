@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-on-screen",
+  "title": "Use On Screen",
+  "description": "Ref plus an is-near-viewport flag, used to pause loops off-screen.",
+  "dependencies": [
+    "motion"
+  ],
+  "registryDependencies": [
+    "utils",
+    "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json"
+  ],
+  "files": [
+    {
+      "path": "components/motion/useOnScreen.ts",
+      "content": "\"use client\";\n\nimport { useInView } from \"motion/react\";\nimport { useRef } from \"react\";\n\n/**\n * Ref + \"is it near the viewport\" flag. Used to pause infinite loops and\n * per-frame work while an element is off-screen, so idle sections cost nothing.\n */\nexport function useOnScreen<T extends Element = HTMLDivElement>(margin = \"120px\") {\n  const ref = useRef<T>(null);\n  const onScreen = useInView(ref, { margin: `${margin} 0px ${margin} 0px` as `${number}px 0px ${number}px 0px` });\n  return [ref, onScreen] as const;\n}\n",
+      "type": "registry:hook",
+      "target": "components/motion/useOnScreen.ts"
+    }
+  ],
+  "type": "registry:hook"
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "reorder-list",
+  "title": "Reorder List",
+  "description": "Drag-handle reorderable list.",
+  "dependencies": [
+    "motion",
+    "react-icons"
+  ],
+  "registryDependencies": [
+    "utils",
+    "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json"
+  ],
+  "files": [
+    {
+      "path": "components/drag/ReorderList.tsx",
+      "content": "\"use client\";\n\nimport { Reorder, useDragControls } from \"motion/react\";\nimport { LuGripVertical } from \"react-icons/lu\";\nimport type { ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nexport type Orderable = { id: string; label: ReactNode; tone: string };\n\n/** Drag rows by the grip to reorder. The grip owns the gesture so the page still scrolls on touch. */\nexport function ReorderList<T extends Orderable>({\n  items,\n  onReorder,\n  className,\n}: {\n  items: T[];\n  onReorder: (items: T[]) => void;\n  className?: string;\n}) {\n  return (\n    <Reorder.Group axis=\"y\" values={items} onReorder={onReorder} className={cn(\"flex flex-col gap-3\", className)}>\n      {items.map((it) => (\n        <Row key={it.id} item={it} />\n      ))}\n    </Reorder.Group>\n  );\n}\n\nfunction Row<T extends Orderable>({ item }: { item: T }) {\n  const controls = useDragControls();\n  return (\n    <Reorder.Item\n      value={item}\n      dragListener={false}\n      dragControls={controls}\n      className=\"relative flex items-center gap-3 rounded-2xl border-2 border-ink bg-card p-3 shadow-hard\"\n      whileDrag={{ scale: 1.03, rotate: -1, boxShadow: \"8px 8px 0 0 var(--ink)\", zIndex: 10 }}\n    >\n      <button\n        type=\"button\"\n        aria-label=\"Drag to reorder\"\n        className=\"grid size-9 shrink-0 cursor-grab touch-none place-items-center rounded-xl border-2 border-ink bg-paper active:cursor-grabbing\"\n        onPointerDown={(e) => controls.start(e)}\n        data-cursor=\"Drag\"\n      >\n        <LuGripVertical className=\"size-4\" />\n      </button>\n      <span className={cn(\"size-4 shrink-0 rounded-full border-2 border-ink\", item.tone)} />\n      <span className=\"min-w-0 truncate font-semibold\">{item.label}</span>\n    </Reorder.Item>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/drag/ReorderList.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "leaf-pick",
+  "title": "Leaf Pick",
+  "description": "Leaf-shaped pick icon.",
+  "dependencies": [],
+  "registryDependencies": [
+    "utils",
+    "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json"
+  ],
+  "files": [
+    {
+      "path": "components/cursor/LeafPick.tsx",
+      "content": "import { cn } from \"@/lib/utils\";\n\nconst PICK = \"M50 118C31 101 3 66 4 36 5 12 25 2 50 2s45 10 46 34c1 30-27 65-46 82Z\";\nconst VEIN = \"M50 16C47 44 47 76 50 106M50 46 30 32M50 46l20-14M50 70 32 58M50 70l18-12\";\n\nexport function LeafPick({\n  className,\n  fill = \"var(--tea)\",\n  vein = \"var(--paper)\",\n  shadow = false,\n}: {\n  className?: string;\n  fill?: string;\n  vein?: string;\n  /** hard ink offset shadow drawn in the SVG (cheaper than a CSS drop-shadow filter) */\n  shadow?: boolean;\n}) {\n  return (\n    <svg viewBox=\"0 0 100 120\" className={cn(\"overflow-visible\", className)} aria-hidden>\n      {shadow && <path d={PICK} fill=\"var(--ink)\" transform=\"translate(8 8)\" />}\n      <path d={PICK} fill={fill} />\n      <path d={VEIN} fill=\"none\" stroke={vein} strokeWidth={5} strokeLinecap=\"round\" />\n    </svg>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/cursor/LeafPick.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

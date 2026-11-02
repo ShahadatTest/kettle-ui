@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tilt-card",
+  "title": "Tilt Card",
+  "description": "3D tilt card with a glare.",
+  "dependencies": [
+    "motion"
+  ],
+  "registryDependencies": [
+    "utils",
+    "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json"
+  ],
+  "files": [
+    {
+      "path": "components/motion/TiltCard.tsx",
+      "content": "\"use client\";\n\nimport { motion, useMotionValue, useSpring, useTransform } from \"motion/react\";\nimport type { ReactNode } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\n/** 3D tilt that follows the pointer, with a glare that slides across. */\nexport function TiltCard({ children, className, max = 14 }: { children: ReactNode; className?: string; max?: number }) {\n  const px = useMotionValue(0.5);\n  const py = useMotionValue(0.5);\n  const spring = { stiffness: 200, damping: 18 };\n  const rotateY = useSpring(useTransform(px, [0, 1], [-max, max]), spring);\n  const rotateX = useSpring(useTransform(py, [0, 1], [max, -max]), spring);\n  const glare = useTransform(px, [0, 1], [\"0%\", \"100%\"]);\n  const glareBg = useTransform(glare, (g) => `radial-gradient(circle at ${g} 30%, rgb(255 255 255 / 0.55), transparent 55%)`);\n\n  return (\n    <div className=\"[perspective:900px]\">\n      <motion.div\n        className={cn(\"relative overflow-hidden rounded-[1.75rem] border-2 border-ink shadow-hard-lg [transform-style:preserve-3d]\", className)}\n        style={{ rotateX, rotateY }}\n        onPointerMove={(e) => {\n          const r = e.currentTarget.getBoundingClientRect();\n          px.set((e.clientX - r.left) / r.width);\n          py.set((e.clientY - r.top) / r.height);\n        }}\n        onPointerLeave={() => {\n          px.set(0.5);\n          py.set(0.5);\n        }}\n      >\n        {children}\n        <motion.div className=\"pointer-events-none absolute inset-0 mix-blend-soft-light\" style={{ background: glareBg }} />\n      </motion.div>\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/motion/TiltCard.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

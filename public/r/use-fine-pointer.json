@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "use-fine-pointer",
+  "title": "Use Fine Pointer",
+  "description": "True on mouse and trackpad devices.",
+  "dependencies": [],
+  "registryDependencies": [
+    "utils",
+    "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-theme.json"
+  ],
+  "files": [
+    {
+      "path": "components/motion/useFinePointer.ts",
+      "content": "\"use client\";\n\nimport { useSyncExternalStore } from \"react\";\n\nconst QUERY = \"(hover: hover) and (pointer: fine)\";\n\n/**\n * True on mouse/trackpad devices. Used to keep drag + hover-follow effects\n * off touch screens, where they would hijack scrolling.\n * Server snapshot is false so touch-safe markup is the default.\n */\nexport function useFinePointer() {\n  return useSyncExternalStore(\n    (cb) => {\n      const mq = window.matchMedia(QUERY);\n      mq.addEventListener(\"change\", cb);\n      return () => mq.removeEventListener(\"change\", cb);\n    },\n    () => window.matchMedia(QUERY).matches,\n    () => false\n  );\n}\n",
+      "type": "registry:hook",
+      "target": "components/motion/useFinePointer.ts"
+    }
+  ],
+  "type": "registry:hook"
+}
