@@ -1,0 +1,60 @@
+import { cn } from "@/lib/utils";
+
+const CUP = "M44 92h112l-12 74a16 16 0 0 1-16 13H72a16 16 0 0 1-16-13Z";
+// one strip of wave, 360 units wide; the pattern repeats every 60
+const WAVE = "M0 8Q15 0 30 8T60 8T90 8T120 8T150 8T180 8T210 8T240 8T270 8T300 8T330 8T360 8V120H0Z";
+// the cup's inside (y 92–179, x 44–156 of the 200-unit box) as a CSS clip
+const INSIDE = "polygon(0 0, 100% 0, 89.3% 100%, 10.7% 100%)";
+
+function Wave({ fill, className }: { fill: string; className: string }) {
+  return (
+    <svg viewBox="0 0 360 120" preserveAspectRatio="none" className={cn("absolute left-0 h-[138%] w-[321.4%]", className)}>
+      <path d={WAVE} fill={fill} />
+    </svg>
+  );
+}
+
+/**
+ * Cup pops in, tea pours and fills with a wave, steam curls into notes.
+ * Pure CSS (.brew-cup in globals.css), so it plays before any JS loads. Change `key` to replay.
+ */
+export function BrewCup({ className, dark = true }: { className?: string; dark?: boolean }) {
+  const steam = dark ? "var(--paper)" : "var(--ink)";
+  return (
+    <div className={cn("brew-cup relative aspect-square w-36 md:w-44", className)} aria-hidden>
+      <div className="cup-pour brew absolute left-[48.5%] top-[-45%] h-[130%] w-[3%] rounded-full bg-[#C8812B]" />
+      <div className="cup-inside brew absolute left-[22%] top-[46%] h-[43.5%] w-[56%] overflow-hidden bg-paper" style={{ clipPath: INSIDE }}>
+        <div className="cup-tea brew absolute inset-0">
+          <Wave fill="#A9661C" className="cup-wave top-0" />
+          <Wave fill="#C8812B" className="cup-wave cup-wave-front top-[4.6%]" />
+        </div>
+      </div>
+      <svg viewBox="0 0 200 200" className="cup-outline brew absolute inset-0 size-full overflow-visible">
+        <ellipse cx="100" cy="184" rx="72" ry="9" fill="var(--tea-deep)" stroke="var(--ink)" strokeWidth="5" />
+        <path d={CUP} fill="none" stroke={dark ? "var(--paper)" : "var(--ink)"} strokeWidth="5" strokeLinejoin="round" />
+        <path d="M154 108h10a20 20 0 0 1 0 40h-16" fill="none" stroke={dark ? "var(--paper)" : "var(--ink)"} strokeWidth="5" strokeLinecap="round" />
+        {[76, 100, 124].map((x, i) => (
+          <path
+            key={x}
+            className="cup-steam"
+            style={{ animationDelay: `${1.3 + i * 0.12}s` }}
+            d={`M${x} 80c-8-8 8-14 0-24s8-14 0-22`}
+            fill="none"
+            stroke={steam}
+            strokeWidth="4"
+            strokeLinecap="round"
+          />
+        ))}
+      </svg>
+      {["♪", "♫", "♪"].map((n, i) => (
+        <span
+          key={i}
+          className="cup-note absolute top-[2%] -translate-x-1/2 text-lg leading-none text-sun md:text-2xl"
+          style={{ left: `${38 + i * 12}%`, animationDelay: `${1.5 + i * 0.15}s` }}
+        >
+          {n}
+        </span>
+      ))}
+    </div>
+  );
+}
