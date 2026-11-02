@@ -212,6 +212,9 @@ html[data-preloaded] .preloader {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+  .preloader {
+    display: none;
+  }
 }
 
 /* Custom cursor: hide the native one, except where people type */
