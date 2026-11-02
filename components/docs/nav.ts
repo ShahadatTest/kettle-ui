@@ -24,6 +24,7 @@ export const DOCS_NAV: NavGroup[] = [
       { id: "reveal", label: "Reveal & Stagger" },
     ],
   },
+  { group: "Pointers", items: [{ id: "cursors", label: "Cursors" }] },
   {
     group: "Illustrations",
     items: [
