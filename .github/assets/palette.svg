@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" width="1200" height="300" role="img" aria-label="Kettle UI colour palette">
+  <style>
+    .sw { animation: pop .7s cubic-bezier(.34,1.56,.64,1) both, float 4s ease-in-out infinite; transform-box: fill-box; transform-origin: center bottom; }
+    .name { font: 900 20px "Arial Black", Arial, sans-serif; fill: #1a1714; }
+    .hex { font: 600 13px "SFMono-Regular", Menlo, Consolas, monospace; letter-spacing: 1.5px; }
+    @keyframes pop { from { opacity: 0; transform: translateY(40px) scale(.6) rotate(-8deg); } }
+    @keyframes float { 50% { transform: translateY(-6px); } }
+    @media (prefers-reduced-motion: reduce) { .sw { animation: none; } }
+  </style>
+  <rect x="2" y="2" width="1196" height="296" rx="32" fill="#fbf6ea" stroke="#1a1714" stroke-width="4"/>
+  <g class="sw" style="animation-delay:0.00s,0.80s">
+    <rect x="37" y="49" width="100" height="200" rx="22" fill="#1a1714"/>
+    <rect x="32" y="44" width="100" height="200" rx="22" fill="#fffdf7" stroke="#1a1714" stroke-width="3"/>
+    <path d="M32 66a22 22 0 0 1 22-22h56a22 22 0 0 1 22 22v104H32Z" fill="#FBF6EA" stroke="#1a1714" stroke-width="3"/>
+    <text class="hex" x="44" y="160" fill="#1a1714">#FBF6EA</text>
+    <text class="name" x="44" y="206" style="font-size:20px">Paper</text>
+  </g>
+  <g class="sw" style="animation-delay:0.09s,0.89s">
+    <rect x="151" y="49" width="100" height="200" rx="22" fill="#1a1714"/>
+    <rect x="146" y="44" width="100" height="200" rx="22" fill="#fffdf7" stroke="#1a1714" stroke-width="3"/>
+    <path d="M146 66a22 22 0 0 1 22-22h56a22 22 0 0 1 22 22v104H146Z" fill="#F3EAD4" stroke="#1a1714" stroke-width="3"/>
+    <text class="hex" x="158" y="160" fill="#1a1714">#F3EAD4</text>
+    <text class="name" x="158" y="206" style="font-size:15px">Paper 2</text>
+  </g>
+  <g class="sw" style="animation-delay:0.18s,0.98s">
+    <rect x="265" y="49" width="100" height="200" rx="22" fill="#1a1714"/>
+    <rect x="260" y="44" width="100" height="200" rx="22" fill="#fffdf7" stroke="#1a1714" stroke-width="3"/>
+    <path d="M260 66a22 22 0 0 1 22-22h56a22 22 0 0 1 22 22v104H260Z" fill="#1A1714" stroke="#1a1714" stroke-width="3"/>
+    <text class="hex" x="272" y="160" fill="#fbf6ea">#1A1714</text>
+    <text class="name" x="272" y="206" style="font-size:20px">Ink</text>
+  </g>
+  <g class="sw" style="animation-delay:0.27s,1.07s">
+    <rect x="379" y="49" width="100" height="200" rx="22" fill="#1a1714"/>
+    <rect x="374" y="44" width="100" height="200" rx="22" fill="#fffdf7" stroke="#1a1714" stroke-width="3"/>
+    <path d="M374 66a22 22 0 0 1 22-22h56a22 22 0 0 1 22 22v104H374Z" fill="#1FA34A" stroke="#1a1714" stroke-width="3"/>
+    <text class="hex" x="386" y="160" fill="#fbf6ea">#1FA34A</text>
+    <text class="name" x="386" y="206" style="font-size:20px">Tea</text>
+  </g>
+  <g class="sw" style="animation-delay:0.36s,1.16s">
+    <rect x="493" y="49" width="100" height="200" rx="22" fill="#1a1714"/>
+    <rect x="488" y="44" width="100" height="200" rx="22" fill="#fffdf7" stroke="#1a1714" stroke-width="3"/>
+    <path d="M488 66a22 22 0 0 1 22-22h56a22 22 0 0 1 22 22v104H488Z" fill="#0F6B30" stroke="#1a1714" stroke-width="3"/>
+    <text class="hex" x="500" y="160" fill="#fbf6ea">#0F6B30</text>
+    <text class="name" x="500" y="206" style="font-size:15px">Tea Deep</text>
+  </g>
+  <g class="sw" style="animation-delay:0.45s,1.25s">
+    <rect x="607" y="49" width="100" height="200" rx="22" fill="#1a1714"/>
+    <rect x="602" y="44" width="100" height="200" rx="22" fill="#fffdf7" stroke="#1a1714" stroke-width="3"/>
+    <path d="M602 66a22 22 0 0 1 22-22h56a22 22 0 0 1 22 22v104H602Z" fill="#FF4B1F" stroke="#1a1714" stroke-width="3"/>
+    <text class="hex" x="614" y="160" fill="#fbf6ea">#FF4B1F</text>
+    <text class="name" x="614" y="206" style="font-size:20px">Tunes</text>
+  </g>
+  <g class="sw" style="animation-delay:0.54s,1.34s">
+    <rect x="721" y="49" width="100" height="200" rx="22" fill="#1a1714"/>
+    <rect x="716" y="44" width="100" height="200" rx="22" fill="#fffdf7" stroke="#1a1714" stroke-width="3"/>
+    <path d="M716 66a22 22 0 0 1 22-22h56a22 22 0 0 1 22 22v104H716Z" fill="#FF4FB8" stroke="#1a1714" stroke-width="3"/>
+    <text class="hex" x="728" y="160" fill="#1a1714">#FF4FB8</text>
+    <text class="name" x="728" y="206" style="font-size:15px">Strings</text>
+  </g>
+  <g class="sw" style="animation-delay:0.63s,1.43s">
+    <rect x="835" y="49" width="100" height="200" rx="22" fill="#1a1714"/>
+    <rect x="830" y="44" width="100" height="200" rx="22" fill="#fffdf7" stroke="#1a1714" stroke-width="3"/>
+    <path d="M830 66a22 22 0 0 1 22-22h56a22 22 0 0 1 22 22v104H830Z" fill="#8A7CFF" stroke="#1a1714" stroke-width="3"/>
+    <text class="hex" x="842" y="160" fill="#1a1714">#8A7CFF</text>
+    <text class="name" x="842" y="206" style="font-size:20px">Lilac</text>
+  </g>
+  <g class="sw" style="animation-delay:0.72s,1.52s">
+    <rect x="949" y="49" width="100" height="200" rx="22" fill="#1a1714"/>
+    <rect x="944" y="44" width="100" height="200" rx="22" fill="#fffdf7" stroke="#1a1714" stroke-width="3"/>
+    <path d="M944 66a22 22 0 0 1 22-22h56a22 22 0 0 1 22 22v104H944Z" fill="#FFD43B" stroke="#1a1714" stroke-width="3"/>
+    <text class="hex" x="956" y="160" fill="#1a1714">#FFD43B</text>
+    <text class="name" x="956" y="206" style="font-size:20px">Sun</text>
+  </g>
+  <g class="sw" style="animation-delay:0.81s,1.61s">
+    <rect x="1063" y="49" width="100" height="200" rx="22" fill="#1a1714"/>
+    <rect x="1058" y="44" width="100" height="200" rx="22" fill="#fffdf7" stroke="#1a1714" stroke-width="3"/>
+    <path d="M1058 66a22 22 0 0 1 22-22h56a22 22 0 0 1 22 22v104H1058Z" fill="#7FD1F5" stroke="#1a1714" stroke-width="3"/>
+    <text class="hex" x="1070" y="160" fill="#1a1714">#7FD1F5</text>
+    <text class="name" x="1070" y="206" style="font-size:20px">Sky</text>
+  </g>
+</svg>
