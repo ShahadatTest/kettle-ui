@@ -8,13 +8,13 @@ import { cn } from "@/lib/utils";
 export type Orderable = { id: string; label: ReactNode; tone: string };
 
 /** Drag rows by the grip to reorder. The grip owns the gesture so the page still scrolls on touch. */
-export function ReorderList({
+export function ReorderList<T extends Orderable>({
   items,
   onReorder,
   className,
 }: {
-  items: Orderable[];
-  onReorder: (items: Orderable[]) => void;
+  items: T[];
+  onReorder: (items: T[]) => void;
   className?: string;
 }) {
   return (
@@ -26,7 +26,7 @@ export function ReorderList({
   );
 }
 
-function Row({ item }: { item: Orderable }) {
+function Row<T extends Orderable>({ item }: { item: T }) {
   const controls = useDragControls();
   return (
     <Reorder.Item
