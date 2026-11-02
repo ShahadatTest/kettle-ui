@@ -38,7 +38,7 @@ export function Swatch({ color }: { color: Color }) {
         <button
           type="button"
           onClick={() => copy(`var(${color.token})`)}
-          className="w-fit truncate font-mono text-xs text-muted-foreground hover:text-ink"
+          className="-mx-1 -my-1.5 w-fit truncate rounded px-1 py-1.5 font-mono text-xs text-muted-foreground hover:text-ink"
         >
           {copied === `var(${color.token})` ? "copied ✓" : color.token}
         </button>
