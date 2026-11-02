@@ -1,10 +1,14 @@
-<p align="center">
-  <img src=".github/assets/banner.svg" alt="Kettle UI by Apurva: a toy train crossing green hills" width="100%" />
-</p>
+# Kettle UI
+Playful React components for shadcn projects that copy into your app with one command.
+```bash
+npx shadcn@latest add https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-all.json
+```
+![Demo](docs/demo.gif) <!-- TODO: 5–10s recording of `npx shadcn add @kettle/pill-button` then the button hovering in an app -->
+
+**Live demo:** https://kettle-ui.vercel.app
 
 <p align="center">
-  <b>React components with ink outlines, hard offset shadows and spring animations.</b><br />
-  Copy them into your project with one shadcn command and change whatever you like.
+  <img src=".github/assets/banner.svg" alt="Kettle UI by Apurva: a toy train crossing green hills" width="100%" />
 </p>
 
 <p align="center">
