@@ -126,7 +126,14 @@ export function Header({ nav }: { nav: NavGroup[] }) {
         </Link>
       </div>
       {/* phones/tablets: the sidebar becomes a swipeable chip rail */}
-      <nav ref={rail} className="hide-scroll relative flex gap-2 overflow-x-auto border-t-2 border-ink/10 px-4 py-2.5 lg:hidden" aria-label="Sections">
+      <nav
+        ref={rail}
+        className={cn(
+          "hide-scroll relative flex gap-2 overflow-x-auto border-t-2 px-4 py-2.5 transition-colors duration-300 lg:hidden",
+          docked ? "border-transparent" : "border-ink/10"
+        )}
+        aria-label="Sections"
+      >
         {nav.flatMap((g) => g.items).map((it) => (
           <a
             key={it.id}
