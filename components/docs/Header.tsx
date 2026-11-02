@@ -60,6 +60,13 @@ export function Logo() {
 }
 
 export function Header({ nav }: { nav: NavGroup[] }) {
+  const active = useActiveSection(nav);
+  const rail = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const chip = active && rail.current?.querySelector<HTMLElement>(`[data-id="${active}"]`);
+    // scrollIntoView would also nudge the page and fight smooth scrolling, so move the rail only
+    if (chip && rail.current) rail.current.scrollTo({ left: chip.offsetLeft - (rail.current.clientWidth - chip.offsetWidth) / 2, behavior: "smooth" });
+  }, [active]);
   return (
     <header className="sticky top-0 z-40 border-b-2 border-ink bg-paper/85 backdrop-blur-md supports-[backdrop-filter]:bg-paper/75">
       <div className="mx-auto flex h-16 max-w-[90rem] items-center justify-between gap-4 px-4 sm:px-6 lg:px-10">
@@ -78,12 +85,17 @@ export function Header({ nav }: { nav: NavGroup[] }) {
         </Link>
       </div>
       {/* phones/tablets: the sidebar becomes a swipeable chip rail */}
-      <nav className="hide-scroll flex gap-2 overflow-x-auto border-t-2 border-ink/10 px-4 py-2.5 lg:hidden" aria-label="Sections">
+      <nav ref={rail} className="hide-scroll relative flex gap-2 overflow-x-auto border-t-2 border-ink/10 px-4 py-2.5 lg:hidden" aria-label="Sections">
         {nav.flatMap((g) => g.items).map((it) => (
           <a
             key={it.id}
+            data-id={it.id}
             href={`#${it.id}`}
-            className="shrink-0 rounded-full border-2 border-ink bg-card px-3 py-1 text-sm font-semibold whitespace-nowrap active:bg-sun"
+            aria-current={active === it.id ? "location" : undefined}
+            className={cn(
+              "shrink-0 rounded-full border-2 border-ink px-3 py-1 text-sm font-semibold whitespace-nowrap transition-colors",
+              active === it.id ? "bg-ink text-paper" : "bg-card active:bg-sun"
+            )}
           >
             {it.label}
           </a>
