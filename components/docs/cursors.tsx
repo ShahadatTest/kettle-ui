@@ -7,14 +7,14 @@ import { cn } from "@/lib/utils";
 
 type CursorChoice = CursorVariant | "native";
 
-const CURSORS: { id: CursorChoice; name: string; note: string; tone: string }[] = [
-  { id: "leaf", name: "Leaf Pick", note: "The original. Tilts and presses on click.", tone: "bg-tea" },
-  { id: "ring", name: "Lag Ring", note: "Dot plus a ring that trails behind and grows over links.", tone: "bg-sun" },
-  { id: "blob", name: "Invert Blob", note: "Difference-blend circle that inverts whatever it covers.", tone: "bg-lilac" },
-  { id: "trail", name: "Comet Trail", note: "Eight coloured dots, each a little slower than the last.", tone: "bg-strings" },
-  { id: "spark", name: "Sparkler", note: "Arrow that sheds stars as it moves. Click for a burst.", tone: "bg-tunes" },
-  { id: "kettle", name: "Kettle", note: "Leans into fast moves. Puffs steam on click.", tone: "bg-sky" },
-  { id: "native", name: "Native", note: "Your system pointer.", tone: "bg-paper" },
+const CURSORS: { id: CursorChoice; name: string; note: string; click: string; tone: string }[] = [
+  { id: "leaf", name: "Leaf Pick", note: "The original. Tilts and presses on click.", click: "The pick flips and presses down.", tone: "bg-tea" },
+  { id: "ring", name: "Lag Ring", note: "Dot plus a ring that trails behind and grows over links.", click: "The ring tightens around the dot.", tone: "bg-sun" },
+  { id: "blob", name: "Invert Blob", note: "Difference-blend circle that inverts whatever it covers.", click: "The blob shrinks. Over links it swells.", tone: "bg-lilac" },
+  { id: "trail", name: "Comet Trail", note: "Eight coloured dots, each a little slower than the last.", click: "Draw circles fast and watch the tail swing.", tone: "bg-strings" },
+  { id: "spark", name: "Sparkler", note: "Arrow that sheds stars as it moves. Click for a burst.", click: "A burst of twelve stars.", tone: "bg-tunes" },
+  { id: "kettle", name: "Kettle", note: "Leans into fast moves. Puffs steam on click.", click: "A puff of steam from the spout.", tone: "bg-sky" },
+  { id: "native", name: "Native", note: "Your system pointer.", click: "Your system's own click. Pick another style above.", tone: "bg-paper" },
 ];
 
 // module-level so the hero strip, the lab and client-side page changes all share one choice
