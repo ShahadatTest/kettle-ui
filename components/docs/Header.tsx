@@ -59,6 +59,32 @@ export function Logo() {
   );
 }
 
+function useScrolled(offset = 16) {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      setScrolled(window.scrollY > offset);
+    };
+    const schedule = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", schedule, { passive: true });
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", schedule);
+    };
+  }, [offset]);
+  return scrolled;
+}
+
+// both states add up to the same height (64 + 2 at the top, 16 + 48 + 2 docked) so the page never jumps.
+// The 16 is header padding, not pill margin, because a child margin would collapse out of the header.
+const DOCK =
+  "transition-[max-width,width,height,padding,border-radius,border-color,background-color,box-shadow] duration-500 ease-[var(--ease-out-expo)] motion-reduce:transition-none";
+
 export function Header({ nav }: { nav: NavGroup[] }) {
   const active = useActiveSection(nav);
   const rail = useRef<HTMLElement>(null);
