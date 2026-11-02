@@ -94,6 +94,7 @@ export function Header({ nav }: { nav: NavGroup[] }) {
 }
 
 export function Sidebar({ nav }: { nav: NavGroup[] }) {
+  const active = useActiveSection(nav);
   return (
     <aside className="hidden lg:block">
       <nav className="sticky top-24 flex max-h-[calc(100dvh-7rem)] flex-col gap-8 overflow-y-auto pb-10 pr-4" aria-label="Sections">
@@ -105,7 +106,11 @@ export function Sidebar({ nav }: { nav: NavGroup[] }) {
                 <li key={it.id}>
                   <a
                     href={`#${it.id}`}
-                    className="-ml-0.5 block border-l-2 border-transparent py-1.5 pl-4 font-semibold text-ink/70 transition-colors hover:border-tunes hover:text-ink"
+                    aria-current={active === it.id ? "location" : undefined}
+                    className={cn(
+                      "relative isolate -ml-0.5 block border-l-2 border-transparent py-1.5 pl-4 font-semibold transition-colors",
+                      active === it.id ? "text-ink" : "text-ink/70 hover:border-tunes hover:text-ink"
+                    )}
                   >
                     {it.label}
                   </a>
