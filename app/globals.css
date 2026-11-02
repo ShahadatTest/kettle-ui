@@ -144,6 +144,63 @@
   }
 }
 
+/* Preloader: ~1.1s of train, then the sheet lifts away. Transforms only, so it stays smooth on slow phones. */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: grid;
+  place-items: center;
+  background: var(--paper);
+  border-bottom: 2px solid var(--ink);
+  animation: preloader-out 0.6s var(--ease-out-expo) 1.15s forwards;
+}
+html[data-preloaded] .preloader {
+  display: none;
+}
+/* ToyTrain pauses itself until hydration; here it has to run from the first frame */
+.preloader .toy-train,
+.preloader .toy-train * {
+  animation-play-state: running !important;
+}
+.preloader-train {
+  animation: preloader-in 0.8s var(--ease-out-expo) both;
+}
+.preloader-track {
+  width: 100%;
+  height: 8px;
+  margin-top: -2px;
+  border-top: 3px solid var(--ink);
+  background: repeating-linear-gradient(90deg, var(--ink) 0 4px, transparent 4px 18px);
+  animation: preloader-ties 0.35s linear infinite;
+}
+.preloader-bar {
+  transform-origin: left;
+  animation: preloader-bar 1.05s cubic-bezier(0.65, 0, 0.35, 1) both;
+}
+@keyframes preloader-in {
+  from {
+    transform: translateX(-60vw);
+  }
+}
+@keyframes preloader-ties {
+  to {
+    background-position: -18px 0;
+  }
+}
+@keyframes preloader-bar {
+  from {
+    transform: scaleX(0);
+  }
+}
+@keyframes preloader-out {
+  to {
+    transform: translateY(-100%);
+    border-radius: 0 0 2.5rem 2.5rem;
+    visibility: hidden;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
