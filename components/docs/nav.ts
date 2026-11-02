@@ -4,6 +4,7 @@ export const DOCS_NAV: NavGroup[] = [
   {
     group: "Foundations",
     items: [
+      { id: "install", label: "Install" },
       { id: "colors", label: "Colours" },
       { id: "typography", label: "Typography" },
       { id: "effects", label: "Shadows & Motion" },

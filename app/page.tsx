@@ -5,7 +5,7 @@ import { DocSection } from "@/components/docs/DocSection";
 import { Showcase } from "@/components/docs/Showcase";
 import { Swatch } from "@/components/docs/Swatch";
 import { BRAND, SEMANTIC } from "@/components/docs/colors";
-import { SNIPPETS } from "@/components/docs/snippets";
+import { REGISTRY, SNIPPETS } from "@/components/docs/snippets";
 import { BareHeroScene, FieldDemo, LiveHeroScene, RevealDemo, TrainStepperDemo } from "@/components/docs/demos";
 import { CopyButton } from "@/components/docs/CopyButton";
 import { PillButton } from "@/components/kit/PillButton";
@@ -58,15 +58,15 @@ export default function Home() {
               <PillButton href="#pill-button" tone="ink">
                 Browse components
               </PillButton>
-              <PillButton href="#colors" tone="sun" arrow={false}>
-                See the palette
+              <PillButton href="#install" tone="sun" arrow={false}>
+                Install
               </PillButton>
             </div>
             <div className="mt-8 flex w-full max-w-md items-center justify-between gap-3 rounded-2xl border-2 border-ink bg-ink py-2 pl-4 pr-2 text-paper">
               <code className="truncate font-mono text-sm">
-                <span className="text-sun">$</span> npm i motion react-icons clsx tailwind-merge
+                <span className="text-sun">$</span> npx shadcn add @kettle/pill-button
               </code>
-              <CopyButton value="npm i motion react-icons clsx tailwind-merge" className="shrink-0 text-sun" />
+              <CopyButton value="npx shadcn add @kettle/pill-button" className="shrink-0 text-sun" />
             </div>
           </div>
 
@@ -110,6 +110,41 @@ export default function Home() {
       <div className="mx-auto grid max-w-[90rem] gap-10 px-4 pt-6 sm:px-6 lg:grid-cols-[13rem_minmax(0,1fr)] lg:px-10 lg:pt-16 xl:gap-16">
         <Sidebar nav={DOCS_NAV} />
         <main className="min-w-0">
+          <DocSection
+            id="install"
+            eyebrow="Foundations"
+            title="Install"
+            intro="Kettle UI is a shadcn registry. The CLI copies each component into your project with its npm packages, the colour tokens and the keyframes it needs, so you own the code and can edit it."
+          >
+            <ol className="flex flex-col gap-6">
+              {[
+                ["Set up shadcn", "Skip this if your project already has a components.json.", "npx shadcn@latest init"],
+                ["Add the registry", "Put this in components.json so you can use the short @kettle names.", SNIPPETS.registry],
+                ["Add components", "One at a time, or everything at once with kettle-all.", "npx shadcn@latest add @kettle/pill-button @kettle/cursor"],
+                ["Or skip step 2", "Every item also installs straight from its URL.", `npx shadcn@latest add ${REGISTRY}/kettle-all.json`],
+              ].map(([title, note, cmd], i) => (
+                <li key={title} className="grid gap-3 sm:grid-cols-[3rem_minmax(0,1fr)]">
+                  <span className="grid size-10 place-items-center rounded-full border-2 border-ink bg-sun font-display text-lg font-extrabold shadow-hard">{i + 1}</span>
+                  <div className="min-w-0">
+                    <h3 className="font-display text-xl font-extrabold">{title}</h3>
+                    <p className="text-muted-foreground">{note}</p>
+                    <div className="relative mt-3 rounded-2xl border-2 border-ink bg-ink text-paper">
+                      <CopyButton value={cmd} className="absolute right-3 top-3 bg-ink text-sun hover:bg-paper/10" />
+                      <pre className="overflow-x-auto p-4 pr-28 font-mono text-[13px] leading-relaxed">
+                        <code>{cmd}</code>
+                      </pre>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <p className="rounded-2xl border-2 border-dashed border-ink bg-paper-2 p-4 text-sm">
+              The display and mono fonts are Bricolage Grotesque and Fragment Mono. Load them with next/font and set the
+              <code className="mx-1 font-mono">--font-bricolage</code> and <code className="mx-1 font-mono">--font-fragment-mono</code>
+              variables, or the theme falls back to system fonts. PillButton uses next/link, so it needs Next.js. Everything else is plain React.
+            </p>
+          </DocSection>
+
           <DocSection
             id="colors"
             eyebrow="Foundations"

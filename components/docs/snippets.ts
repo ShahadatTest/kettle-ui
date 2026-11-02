@@ -1,4 +1,12 @@
+export const REGISTRY = "https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r";
+
 export const SNIPPETS = {
+  registry: `// components.json
+{
+  "registries": {
+    "@kettle": "${REGISTRY}/{name}.json"
+  }
+}`,
   tokens: `:root {
   --paper: #fbf6ea;   --paper-2: #f3ead4;
   --ink: #1a1714;
