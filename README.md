@@ -3,7 +3,7 @@ Playful React components for shadcn projects that copy into your app with one co
 ```bash
 npx shadcn@latest add https://raw.githubusercontent.com/apurvamukherjee/kettle-ui/main/public/r/kettle-all.json
 ```
-![Demo](docs/demo.gif) <!-- TODO: 5–10s recording of `npx shadcn add @kettle/pill-button` then the button hovering in an app -->
+![Demo: switching custom cursors on the Kettle UI site, then hovering the pill buttons](docs/demo.gif)
 
 **Live demo:** https://kettle-ui.vercel.app
 
