@@ -27,6 +27,7 @@ export function Header({ nav }: { nav: NavGroup[] }) {
         <nav className="hidden items-center gap-6 font-mono text-xs uppercase tracking-widest md:flex" aria-label="Primary">
           <Link href="/#colors" className="hover:text-tunes">Foundations</Link>
           <Link href="/#pill-button" className="hover:text-tunes">Components</Link>
+          <Link href="/#cursors" className="hover:text-tunes">Cursors</Link>
           <Link href="/#hero-scene" className="hover:text-tunes">Illustrations</Link>
         </nav>
         <Link
