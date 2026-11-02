@@ -87,6 +87,7 @@ const DOCK =
 
 export function Header({ nav }: { nav: NavGroup[] }) {
   const active = useActiveSection(nav);
+  const docked = useScrolled();
   const rail = useRef<HTMLElement>(null);
   useEffect(() => {
     const chip = active && rail.current?.querySelector<HTMLElement>(`[data-id="${active}"]`);
@@ -94,8 +95,22 @@ export function Header({ nav }: { nav: NavGroup[] }) {
     if (chip && rail.current) rail.current.scrollTo({ left: chip.offsetLeft - (rail.current.clientWidth - chip.offsetWidth) / 2, behavior: "smooth" });
   }, [active]);
   return (
-    <header className="sticky top-0 z-40 border-b-2 border-ink bg-paper/85 backdrop-blur-md supports-[backdrop-filter]:bg-paper/75">
-      <div className="mx-auto flex h-16 max-w-[90rem] items-center justify-between gap-4 px-4 sm:px-6 lg:px-10">
+    <header
+      data-docked={docked || undefined}
+      className={cn(
+        "sticky top-0 z-40 border-b-2 transition-[background-color,border-color,padding] duration-500 ease-[var(--ease-out-expo)] motion-reduce:transition-none",
+        docked ? "border-transparent bg-transparent pt-4" : "pt-0 border-ink bg-paper/85 backdrop-blur-md supports-[backdrop-filter]:bg-paper/75"
+      )}
+    >
+      <div
+        className={cn(
+          "mx-auto flex items-center justify-between gap-4",
+          DOCK,
+          docked
+            ? "h-12 w-[calc(100%-1.5rem)] max-w-5xl rounded-[2rem] border-2 border-ink bg-paper/85 px-3 shadow-hard backdrop-blur-md supports-[backdrop-filter]:bg-paper/75 sm:px-4"
+            : "h-16 w-full max-w-[90rem] rounded-none border-0 border-transparent px-4 sm:px-6 lg:px-10"
+        )}
+      >
         <Logo />
         <nav className="hidden items-center gap-6 font-mono text-xs uppercase tracking-widest md:flex" aria-label="Primary">
           <Link href="/#colors" className="hover:text-tunes">Foundations</Link>
