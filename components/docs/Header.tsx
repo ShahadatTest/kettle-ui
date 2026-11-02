@@ -9,14 +9,39 @@ import type { NavGroup } from "./nav";
 // a bit past scroll-padding-top in globals.css, so a clicked link lights up its own entry
 const SPY_LINE = 140;
 
+// Scroll events alone miss jumps the browser makes before hydration or without scrolling:
+// #hash landings, scroll restoration, back/forward cache and content growing above the fold.
+const TRIGGERS = ["scroll", "resize", "load", "pageshow", "hashchange", "scrollend"];
+
+function watchViewport(update: () => void) {
+  let raf = 0;
+  const schedule = () => {
+    if (!raf)
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        update();
+      });
+  };
+  TRIGGERS.forEach((t) => window.addEventListener(t, schedule, { passive: true }));
+  const resize = new ResizeObserver(schedule);
+  resize.observe(document.body);
+  // restoration can land after the first effects run
+  const late = window.setTimeout(schedule, 350);
+  update();
+  return () => {
+    cancelAnimationFrame(raf);
+    window.clearTimeout(late);
+    resize.disconnect();
+    TRIGGERS.forEach((t) => window.removeEventListener(t, schedule));
+  };
+}
+
 function useActiveSection(nav: NavGroup[]) {
   const key = nav.flatMap((g) => g.items.map((i) => i.id)).join(",");
   const [active, setActive] = useState<string | null>(null);
   useEffect(() => {
     const ids = key.split(",");
-    let raf = 0;
-    const update = () => {
-      raf = 0;
+    return watchViewport(() => {
       let current: string | null = null;
       for (const id of ids) {
         const el = document.getElementById(id);
@@ -25,18 +50,7 @@ function useActiveSection(nav: NavGroup[]) {
       // the last sections can be too short to ever reach the line
       if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) current = ids[ids.length - 1];
       setActive(current);
-    };
-    const schedule = () => {
-      if (!raf) raf = requestAnimationFrame(update);
-    };
-    update();
-    window.addEventListener("scroll", schedule, { passive: true });
-    window.addEventListener("resize", schedule);
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("scroll", schedule);
-      window.removeEventListener("resize", schedule);
-    };
+    });
   }, [key]);
   return active;
 }
@@ -61,22 +75,7 @@ export function Logo() {
 
 function useScrolled(offset = 16) {
   const [scrolled, setScrolled] = useState(false);
-  useEffect(() => {
-    let raf = 0;
-    const update = () => {
-      raf = 0;
-      setScrolled(window.scrollY > offset);
-    };
-    const schedule = () => {
-      if (!raf) raf = requestAnimationFrame(update);
-    };
-    update();
-    window.addEventListener("scroll", schedule, { passive: true });
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener("scroll", schedule);
-    };
-  }, [offset]);
+  useEffect(() => watchViewport(() => setScrolled(window.scrollY > offset)), [offset]);
   return scrolled;
 }
 
