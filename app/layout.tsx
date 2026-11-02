@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque, Fragment_Mono, Manrope } from "next/font/google";
 import { MotionConfig } from "motion/react";
 import { PageCursor } from "@/components/docs/cursors";
+import { Preloader } from "@/components/docs/Preloader";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({ variable: "--font-bricolage", subsets: ["latin"], axes: ["opsz", "wdth"] });
@@ -29,8 +30,9 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${bricolage.variable} ${manrope.variable} ${fragmentMono.variable}`}>
+        <Preloader />
         <MotionConfig reducedMotion="user">
           <PageCursor />
           {children}
