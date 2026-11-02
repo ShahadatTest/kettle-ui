@@ -7,6 +7,8 @@ import { Swatch } from "@/components/docs/Swatch";
 import { BRAND, SEMANTIC } from "@/components/docs/colors";
 import { REGISTRY, SNIPPETS } from "@/components/docs/snippets";
 import { BareHeroScene, FieldDemo, LiveHeroScene, RevealDemo, TrainStepperDemo } from "@/components/docs/demos";
+import { CursorLab, CursorStrip } from "@/components/docs/cursors";
+import { GALLERY_SNIPPETS } from "@/components/docs/gallery-snippets";
 import { CopyButton } from "@/components/docs/CopyButton";
 import { PillButton } from "@/components/kit/PillButton";
 import { Chip } from "@/components/kit/Chip";
@@ -373,6 +375,17 @@ export default function Home() {
           <DocSection id="reveal" eyebrow="Components" title="Reveal & Stagger" intro="Scroll-triggered entrances that run on the compositor, so they stay smooth on iOS.">
             <Showcase title="Entrances" code={SNIPPETS.reveal}>
               <RevealDemo />
+            </Showcase>
+          </DocSection>
+
+          <DocSection
+            id="cursors"
+            eyebrow="Pointers"
+            title="Cursors"
+            intro="Six custom cursors plus the native one. The one you pick here follows you around the whole site. Mark any element with data-cursor=&quot;Label&quot; and the cursor turns into that label over it."
+          >
+            <Showcase title="Pick a cursor" code={GALLERY_SNIPPETS.cursor}>
+              <CursorLab />
             </Showcase>
           </DocSection>
 
