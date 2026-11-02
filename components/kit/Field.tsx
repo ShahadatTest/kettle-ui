@@ -7,9 +7,13 @@ export function Field({
   hint,
   error,
   className,
+  id: idProp,
   ...props
 }: { label: string; hint?: string; error?: string } & ComponentProps<"input">) {
-  const id = useId();
+  // useId must run unconditionally; prefer a caller-supplied id so the label
+  // and hint stay wired when props spread would otherwise overwrite input id (#1).
+  const generatedId = useId();
+  const id = idProp ?? generatedId;
   const note = error ?? hint;
   return (
     <div className={cn("flex w-full flex-col gap-2", className)}>
