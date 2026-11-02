@@ -5,7 +5,7 @@ npx shadcn@latest add https://raw.githubusercontent.com/apurvamukherjee/kettle-u
 ```
 ![Demo: switching custom cursors on the Kettle UI site, then hovering the pill buttons](docs/demo.gif)
 
-**Live demo:** https://kettle-ui.vercel.app
+**Live :** https://kettle-ui.vercel.app
 
 <p align="center">
   <img src=".github/assets/banner.svg" alt="Kettle UI by Apurva: a toy train crossing green hills" width="100%" />
