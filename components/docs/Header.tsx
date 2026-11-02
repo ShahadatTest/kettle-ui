@@ -112,6 +112,13 @@ export function Sidebar({ nav }: { nav: NavGroup[] }) {
                       active === it.id ? "text-ink" : "text-ink/70 hover:border-tunes hover:text-ink"
                     )}
                   >
+                    {active === it.id && (
+                      <motion.span
+                        layoutId="toc-active"
+                        transition={{ type: "spring", stiffness: 500, damping: 34 }}
+                        className="absolute inset-y-0 left-0 right-0 -z-10 rounded-r-full border-2 border-l-4 border-ink bg-sun shadow-[2px_2px_0_0_var(--ink)]"
+                      />
+                    )}
                     {it.label}
                   </a>
                 </li>
