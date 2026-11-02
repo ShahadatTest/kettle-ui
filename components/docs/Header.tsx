@@ -1,5 +1,45 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import { motion } from "motion/react";
+import { cn } from "@/lib/utils";
 import type { NavGroup } from "./nav";
+
+// a bit past scroll-padding-top in globals.css, so a clicked link lights up its own entry
+const SPY_LINE = 140;
+
+function useActiveSection(nav: NavGroup[]) {
+  const key = nav.flatMap((g) => g.items.map((i) => i.id)).join(",");
+  const [active, setActive] = useState<string | null>(null);
+  useEffect(() => {
+    const ids = key.split(",");
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      let current: string | null = null;
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= SPY_LINE) current = id;
+      }
+      // the last sections can be too short to ever reach the line
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) current = ids[ids.length - 1];
+      setActive(current);
+    };
+    const schedule = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
+  }, [key]);
+  return active;
+}
 
 export function Logo() {
   return (
