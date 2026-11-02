@@ -16,6 +16,7 @@ npx shadcn@latest add https://raw.githubusercontent.com/apurvamukherjee/kettle-u
 </p>
 
 <p align="center">
+  <a href="https://github.com/apurvamukherjee/kettle-ui/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/apurvamukherjee/kettle-ui/actions/workflows/ci.yml/badge.svg" /></a>
   <img alt="Next.js 16" src="https://img.shields.io/badge/Next.js-16-1a1714?style=flat-square&logo=nextdotjs" />
   <img alt="React 19" src="https://img.shields.io/badge/React-19-1a1714?style=flat-square&logo=react" />
   <img alt="Tailwind CSS v4" src="https://img.shields.io/badge/Tailwind_CSS-v4-1a1714?style=flat-square&logo=tailwindcss" />
