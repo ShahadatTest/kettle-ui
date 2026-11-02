@@ -19,7 +19,12 @@ const CURSORS: { id: CursorChoice; name: string; note: string; click: string; to
   { id: "native", name: "Native", note: "Your system pointer.", click: "Your system's own click. Pick another style above.", tone: "bg-paper" },
 ];
 
-const POP = { initial: { scale: 0, rotate: -20 }, animate: { scale: 1, rotate: 0 }, exit: { scale: 0, rotate: 20 }, transition: { type: "spring", stiffness: 420, damping: 18 } } as const;
+// a spring exit takes ~0.6s to settle and mode="wait" holds the next glyph back that long, so leave fast
+const POP = {
+  initial: { scale: 0, rotate: -20 },
+  animate: { scale: 1, rotate: 0, transition: { type: "spring", stiffness: 420, damping: 18 } },
+  exit: { scale: 0, rotate: 20, transition: { duration: 0.12, ease: "easeIn" } },
+} as const;
 
 /** Big still of each cursor for the lab's preview box. */
 function Glyph({ id }: { id: CursorChoice }) {
