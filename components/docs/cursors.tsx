@@ -1,6 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import { Cursor, type CursorVariant } from "@/components/cursor/Cursor";
 import { LeafPick } from "@/components/cursor/LeafPick";
 import { useFinePointer } from "@/components/motion/useFinePointer";
@@ -149,6 +150,7 @@ export function CursorStrip() {
 
 export function CursorLab() {
   const active = useChoice();
+  const current = CURSORS.find((c) => c.id === active) ?? CURSORS[0];
   const fine = useFinePointer();
   return (
     <div className="flex flex-col gap-6">
@@ -180,19 +182,42 @@ export function CursorLab() {
         })}
       </div>
       <div className="grid gap-3 sm:grid-cols-3">
-        {[
-          ["Plain area", undefined, "bg-paper-2"],
-          ["Labelled: View", "View", "bg-sun"],
-          ["Labelled: Play", "Play", "bg-strings"],
-        ].map(([title, label, bg]) => (
-          <div
-            key={title}
-            data-cursor={label}
-            className={cn("grid h-36 place-items-center rounded-2xl border-2 border-ink font-mono text-xs uppercase tracking-widest", bg)}
-          >
-            {title}
-          </div>
-        ))}
+        <div className="relative flex min-h-48 flex-col items-center justify-center gap-3 overflow-hidden rounded-2xl border-2 border-ink bg-paper-2 p-5 text-center">
+          <span className="absolute left-4 top-3 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">Now using</span>
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.span key={current.id} {...POP} className="grid h-24 place-items-center">
+              <Glyph id={current.id} />
+            </motion.span>
+          </AnimatePresence>
+          <span className="font-display text-xl font-extrabold leading-none">{current.name}</span>
+          <span className="text-xs text-muted-foreground">{active === "native" ? "Pick a style above to swap it." : "Move around in here."}</span>
+        </div>
+        <div
+          data-cursor="View"
+          className="relative flex min-h-48 flex-col items-center justify-center gap-3 rounded-2xl border-2 border-ink bg-sun p-5 text-center"
+        >
+          <span className="absolute left-4 top-3 font-mono text-[10px] uppercase tracking-widest text-ink/60">Hover</span>
+          <span className="-rotate-6 rounded-full bg-ink px-4 py-2 font-mono text-xs uppercase tracking-wider text-paper shadow-hard">View</span>
+          <code className="rounded-md bg-ink/10 px-2 py-0.5 font-mono text-xs">data-cursor=&quot;View&quot;</code>
+          <span className="text-xs text-ink/70">
+            {active === "native" ? "Labels need a custom cursor." : `Over this box ${current.name} turns into the label.`}
+          </span>
+        </div>
+        <div className="relative flex min-h-48 flex-col items-center justify-center gap-3 rounded-2xl border-2 border-ink bg-strings p-5 text-center">
+          <span className="absolute left-4 top-3 font-mono text-[10px] uppercase tracking-widest text-ink/60">Click</span>
+          <span className="font-display text-3xl font-extrabold leading-none">Tap in here</span>
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.span
+              key={current.id}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              className="max-w-[16rem] text-sm font-semibold"
+            >
+              {current.click}
+            </motion.span>
+          </AnimatePresence>
+        </div>
       </div>
     </div>
   );
