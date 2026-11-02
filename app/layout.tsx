@@ -8,9 +8,9 @@ const manrope = Manrope({ variable: "--font-manrope", subsets: ["latin"] });
 const fragmentMono = Fragment_Mono({ variable: "--font-fragment-mono", subsets: ["latin"], weight: "400" });
 
 export const metadata: Metadata = {
-  title: "Kettle UI — by Apurva",
+  title: "Kettle UI by Apurva",
   description:
-    "A loud, hand-inked React component library: milky-tea paper, ink outlines, hard shadows and springy motion.",
+    "React components with ink outlines, hard offset shadows and spring animations.",
 };
 
 export const viewport: Viewport = {

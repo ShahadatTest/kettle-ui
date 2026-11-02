@@ -18,13 +18,13 @@ import { Marquee } from "@/components/motion/Marquee";
 import { ToyTrain } from "@/components/illustrations/ToyTrain";
 
 const STATS = [
-  { value: "14", label: "Components" },
+  { value: "22", label: "Components" },
   { value: "10", label: "Brand colours" },
   { value: "3", label: "Typefaces" },
-  { value: "0", label: "CSS-in-JS" },
+  { value: "6", label: "Cursors" },
 ];
 
-const TICKER = ["Ink outlines", "Hard shadows", "Springy motion", "Milky-tea paper", "Open source"];
+const TICKER = ["Ink outlines", "Hard shadows", "Springy motion", "Cream paper", "Made by Apurva"];
 
 export default function Home() {
   return (
@@ -35,7 +35,7 @@ export default function Home() {
       <section className="relative overflow-hidden border-b-2 border-ink">
         <div className="mx-auto grid max-w-[90rem] items-center gap-12 px-4 py-14 sm:px-6 md:py-20 lg:grid-cols-[1.1fr_1fr] lg:px-10 lg:py-28">
           <div className="min-w-0">
-            <Chip>Open design system</Chip>
+            <Chip>Design system</Chip>
             <h1 className="mt-6 font-display text-[clamp(3.75rem,15vw,10.5rem)] font-extrabold uppercase leading-[0.82] tracking-tight">
               Kettle
               <span className="block text-tunes">
@@ -51,8 +51,8 @@ export default function Home() {
               <span className="font-mono text-xs uppercase tracking-widest text-muted-foreground">Hand-inked React components</span>
             </div>
             <p className="mt-8 max-w-xl text-lg text-ink/80 md:text-xl">
-              A loud, friendly component library steeped in milky-tea paper, chunky ink outlines, hard offset shadows and springy
-              motion. Built with React, Tailwind CSS v4 and Motion.
+              React components with ink outlines, hard offset shadows and spring animations on a cream background. Built with
+              React, Tailwind CSS v4 and Motion.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
               <PillButton href="#pill-button" tone="ink">
@@ -114,7 +114,7 @@ export default function Home() {
             id="colors"
             eyebrow="Foundations"
             title="Colours"
-            intro="Milky-tea paper and ink do the heavy lifting; one loud colour per idea. Tap a swatch to copy its hex, or the token to copy the CSS variable."
+            intro="Most surfaces are paper and ink, and each accent colour has its own job. Tap a swatch to copy its hex, or the token name to copy the CSS variable."
           >
             <div>
               <h3 className="mb-5 font-display text-2xl font-extrabold">Brand palette</h3>
@@ -178,7 +178,7 @@ export default function Home() {
             </div>
           </DocSection>
 
-          <DocSection id="effects" eyebrow="Foundations" title="Shadows & Motion" intro="Hard offset shadows instead of blur. Elements lift on hover and press flat on tap.">
+          <DocSection id="effects" eyebrow="Foundations" title="Shadows & Motion" intro="Shadows are solid ink offsets with no blur. Elements lift on hover and press flat when tapped.">
             <Showcase title="Elevation" description="Hover or tap the tiles." code={SNIPPETS.effects}>
               <div className="grid gap-6 sm:grid-cols-3">
                 {[
@@ -368,8 +368,8 @@ export default function Home() {
             </Showcase>
           </DocSection>
 
-          <DocSection id="train-stepper" eyebrow="Illustrations" title="Train Stepper" intro="Ticket-stub tabs with the toy train springing along the track to the selected stop. Great for itineraries and multi-step flows.">
-            <Showcase title="Itinerary" description="Pick a station." code={SNIPPETS.stepper}>
+          <DocSection id="train-stepper" eyebrow="Illustrations" title="Train Stepper" intro="Ticket-stub tabs with the toy train springing along the track to the selected stop. Use it for itineraries or multi-step forms.">
+            <Showcase title="Itinerary" description="Pick a step." code={SNIPPETS.stepper}>
               <TrainStepperDemo />
             </Showcase>
           </DocSection>

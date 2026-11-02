@@ -92,7 +92,6 @@ export function Cursor({ variant = "leaf" }: { variant?: CursorVariant }) {
             <motion.div key={variant} initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }} transition={SPRING}>
               {variant === "leaf" && <Leaf {...p} />}
               {variant === "ring" && <Dot />}
-              {variant === "blob" && null}
               {variant === "trail" && <Dot />}
               {variant === "spark" && <Arrow {...p} />}
               {variant === "kettle" && <Kettle {...p} />}

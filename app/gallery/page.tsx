@@ -30,7 +30,7 @@ export default function Gallery() {
             Things that <span className="text-tunes">move</span>
           </h1>
           <p className="mt-6 max-w-xl text-lg text-ink/80">
-            Strings you can strum, six cursors and things you can drag around. All of them work with a mouse, touch and keyboard.
+            Guitar strings, six cursors and a few things you can drag around. Each section says how it behaves on touch screens.
           </p>
         </div>
       </section>

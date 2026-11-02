@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 const CUP = "M44 92h112l-12 74a16 16 0 0 1-16 13H72a16 16 0 0 1-16-13Z";
 // one strip of wave, 360 units wide; the pattern repeats every 60
 const WAVE = "M0 8Q15 0 30 8T60 8T90 8T120 8T150 8T180 8T210 8T240 8T270 8T300 8T330 8T360 8V120H0Z";
-// the cup's inside (y 92–179, x 44–156 of the 200-unit box) as a CSS clip
+// the cup's inside (y 92 to 179, x 44 to 156 of the 200-unit box) as a CSS clip
 const INSIDE = "polygon(0 0, 100% 0, 89.3% 100%, 10.7% 100%)";
 
 function Wave({ fill, className }: { fill: string; className: string }) {

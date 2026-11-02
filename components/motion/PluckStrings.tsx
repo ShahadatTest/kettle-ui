@@ -13,7 +13,7 @@ const COLORS = [
   "var(--sky)",
 ];
 
-// Public-domain tunes as MIDI note numbers. Every pluck — on any string —
+// Public-domain tunes as MIDI note numbers. Every pluck, on any string,
 // plays the next note, so strumming "performs" a randomly picked song.
 const SONGS: { name: string; notes: number[] }[] = [
   {
@@ -114,8 +114,8 @@ function buildOutput(ctx: AudioContext) {
 
 /**
  * Six guitar strings stretched across the page. Sweep the pointer across
- * them and each one bends, then twangs back with a damped spring — and,
- * with sound switched on, every pluck plays the next note of a random song.
+ * them and each one bends, then twangs back with a damped spring. With
+ * sound switched on, every pluck plays the next note of a random song.
  */
 export function PluckStrings({
   className,
