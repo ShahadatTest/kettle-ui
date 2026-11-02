@@ -128,6 +128,8 @@ npm run dev          # http://localhost:3000
 | `npm run lint` | ESLint |
 | `npm run registry` | Rebuilds `registry.json` and `public/r/*.json` |
 
+Link previews need absolute image URLs. Vercel fills these in on its own. On any other host, build with `SITE_URL=https://your-domain.com npm run build`.
+
 ## How the registry works
 
 `scripts/build-registry.mjs` lists every item with its npm and registry dependencies and writes `registry.json`. `shadcn build` turns that into one JSON file per item in `public/r/`, with the source inlined. Every item depends on `kettle-theme`, which carries the CSS variables and keyframes, so a single `add` produces a component that renders correctly.

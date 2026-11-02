@@ -13,9 +13,15 @@ import { Magnetic } from "@/components/motion/Magnetic";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { Sticker } from "@/components/motion/Sticker";
 
+const title = "Things that move · Kettle UI";
+const description = "Animated components, custom cursors and draggables from Kettle UI.";
+
+// openGraph and twitter replace the root layout's objects instead of merging, so they're spelled out in full
 export const metadata: Metadata = {
-  title: "Gallery · Kettle UI",
-  description: "Animated components, custom cursors and draggables from Kettle UI.",
+  title: "Gallery",
+  description,
+  openGraph: { type: "website", siteName: "Kettle UI", title, description, locale: "en_US" },
+  twitter: { card: "summary_large_image", title, description },
 };
 
 export default function Gallery() {
