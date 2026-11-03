@@ -48,7 +48,7 @@ export function TrainStepper({
           const active = i === idx;
           return (
             <motion.button
-              key={s.label}
+              key={i}
               type="button"
               role="tab"
               aria-selected={active}
